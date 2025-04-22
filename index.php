@@ -9,22 +9,11 @@ $router = new Router();
 
 $router->addRoute('GET', '/', function() {
     View::render('about');
-
 });
+
 $router->addRoute('GET', '/home', function() {
     View::render('home');
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 $router->handleRequest();
