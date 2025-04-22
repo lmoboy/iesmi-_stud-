@@ -1,8 +1,9 @@
 <?php
 
 include_once 'Database.php';
-(new Database()->generateTables());
-
+$db = new Database();
+$db->connect();
+$db->generateTables();
 
 
 
