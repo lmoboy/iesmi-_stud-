@@ -15,13 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     debug_log("Attempting authentication for user: {$name}");
-    $database = new Database();
-    $db = $database->connect();
+    $db = new Database();
 
-    $query = "SELECT * FROM users WHERE name = :name";
-    $stmt = $db->prepare($query);
-    $stmt->execute(['name' => $name]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $db->read('users', ['name' => $name])[0];
 
     if ($user && password_verify($password, $user['password'])) {
         debug_log("Authentication successful for user: {$name}");
@@ -29,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = [
             'id' => $user['id'],
             'name' => $user['name'],
-            'role' => $user['role'] ?? 'user'
+            'role' => $user['role'] ?? 'user',
+            'profile_picture' => $user['profile_picture']
         ];
         // Regenerate session ID for security
         session_regenerate_id(true);

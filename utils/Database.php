@@ -13,6 +13,7 @@ if (!defined('DATABASE_INCLUDED')) {
         private $password = DB_PASS;
         private $conn;
 
+
         public function connect()
         {
             $this->conn = null;
@@ -40,21 +41,23 @@ if (!defined('DATABASE_INCLUDED')) {
         }
 
 
-        public function dropTables(){
+        public function dropTables()
+        {
             debug_log("Dropping tables");
             $this->query("DROP TABLE IF EXISTS grades");
             $this->query("DROP TABLE IF EXISTS subjects");
             $this->query("DROP TABLE IF EXISTS users");
             debug_log("Tables dropped");
         }
-        
-        
+
+
         public function generateTables()
         {
             $sql = "CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL UNIQUE,
             password VARCHAR(100) NOT NULL,
+            profile_picture VARCHAR(255) DEFAULT NULL,
             role ENUM('admin', 'teacher', 'student') NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
@@ -78,13 +81,13 @@ if (!defined('DATABASE_INCLUDED')) {
         )";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
             $this->query($sql);
         }
 
@@ -95,8 +98,12 @@ if (!defined('DATABASE_INCLUDED')) {
                 if (!empty($params)) {
                     debug_log("With parameters: " . json_encode($params));
                 }
-
-                $stmt = $this->conn->prepare($sql);
+                try {
+                    $stmt = $this->conn->prepare($sql);
+                } catch (Exception $e) {
+                    debug_log("Statement preparation failed: " . $e->getMessage(), 'error');
+                    throw $e;
+                }
 
                 // Bind parameters with appropriate types
                 foreach ($params as $key => $value) {
@@ -110,7 +117,6 @@ if (!defined('DATABASE_INCLUDED')) {
                     }
                     $stmt->bindValue($key, $value, $type);
                 }
-
                 $stmt->execute();
                 debug_log("Query executed successfully");
                 return $stmt;
@@ -137,7 +143,7 @@ if (!defined('DATABASE_INCLUDED')) {
         {
             debug_log("Reading from {$table}");
             $sql = "SELECT {$fields} FROM {$table}";
-
+            debug_log("Executing query: {$sql}");
             if (!empty($conditions)) {
                 $sql .= " WHERE ";
                 $where = [];
@@ -147,6 +153,7 @@ if (!defined('DATABASE_INCLUDED')) {
                 $sql .= implode(' AND ', $where);
             }
 
+            debug_log("Conditions + query: {$sql}");
             $stmt = $this->query($sql, $conditions);
             $result = $stmt->fetchAll();
             debug_log("Retrieved " . count($result) . " records");
@@ -155,7 +162,7 @@ if (!defined('DATABASE_INCLUDED')) {
 
         public function update($table, $data, $conditions)
         {
-            if(!$conditions){
+            if (!$conditions) {
                 debug_log("DANGEOUR OPERATION", 'warning');
                 return false;
             }
@@ -187,7 +194,7 @@ if (!defined('DATABASE_INCLUDED')) {
 
         public function delete($table, $conditions)
         {
-            if(!$conditions){
+            if (!$conditions) {
                 debug_log("DANGEOUR OPERATION", 'warning');
                 return false;
             }
@@ -207,5 +214,10 @@ if (!defined('DATABASE_INCLUDED')) {
             debug_log("Deleted " . $result->rowCount() . " records");
             return $result;
         }
+        public function __construct()
+        {
+            $this->connect();
+        }
     }
+
 }
