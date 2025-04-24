@@ -7,7 +7,6 @@ class gradeController{
     function __construct()
     {
         $this->db = new Database();
-        $this->db->connect();
     }
 
     public function getGrades($userID){

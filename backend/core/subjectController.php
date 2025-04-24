@@ -7,7 +7,6 @@ class subjectController{
     function __construct()
     {
         $this->db = new Database();
-        $this->db->connect();
     }
 
     public function getSubjects(){
