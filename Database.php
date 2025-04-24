@@ -46,7 +46,7 @@ class Database
     public function generateTables()
     {
         $sql = "
-        CREATE TABLE IF NOT EXISTS user (
+        CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             role ENUM('admin', 'teacher', 'student') NOT NULL,
@@ -55,7 +55,7 @@ class Database
         )";
         $this->query($sql);
 
-        $sql = "
+        $sql = "    
         CREATE TABLE IF NOT EXISTS subjects (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
