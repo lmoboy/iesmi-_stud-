@@ -8,7 +8,7 @@ if (isset($_SESSION['login_error'])) {
 <main class="flex items-center justify-center min-h-screen bg-base-200">
     <div class="w-full max-w-sm p-8 space-y-6 bg-base-100 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center text-primary">Login</h1>
-        <form action="login" method="POST" class="space-y-4">
+        <form action="/backend/login" method="POST"   class="space-y-4">
             <div class="form-control">
                 <label class="label" for="email">
                     <span class="label-text">Email</span>

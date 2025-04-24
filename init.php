@@ -7,8 +7,8 @@ $db = new Database();
 
 
 $db->connect();
+$db->dropTables();
 $db->generateTables();
-$db->query('INSERT INTO users (email, password, role) VALUES ("admin@admin.com", '. password_hash('admin', PASSWORD_DEFAULT) .', "admin")');
 
 
 

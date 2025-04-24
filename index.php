@@ -18,8 +18,8 @@ require_once 'Database.php';
 $router = new Router();
 
 // Auth routes
-$router->addRoute('POST', '/login', function() {
-    require_once 'backend/loginController.php';
+$router->addRoute('POST', '/backend/login', function() {
+    require_once 'backend\loginHandle.php';
 });
 
 $router->addRoute('GET', '/logout', function() {
