@@ -10,25 +10,29 @@
 </html>
 
 <?php
-require_once 'config.php';
-require_once 'Router.php';
-require_once 'View.php';
-require_once 'Database.php';
+require_once 'utils\config.php';
+require_once 'utils\Router.php';
+require_once 'utils\View.php';
+require_once 'utils\Database.php';
 
 $router = new Router();
 
-// Auth routes
-$router->addRoute('POST', '/login', function() {
-    require_once 'backend/loginController.php';
+
+//--------------------------------BACKEND--------------------------------
+
+$router->addRoute('POST', '/backend/login', function() {
+    require_once 'backend\loginHandle.php';
 });
 
-$router->addRoute('GET', '/logout', function() {
+
+$router->addRoute('GET', '/backend/logout', function() {
     session_destroy();
     header('Location: /');
     exit();
 });
 
-// Home route
+
+//--------------------------------FRONTEND--------------------------------
 $router->addRoute('GET', '/', function() {
     if (isset($_SESSION['user'])) {
         View::render('home');
