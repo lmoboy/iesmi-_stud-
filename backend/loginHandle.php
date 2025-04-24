@@ -1,7 +1,8 @@
 <?php
-include_once '../Database.php';
-include_once '../logging.php';
+include_once 'Database.php';
+include_once 'logging.php';
 
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $db = new Database();

@@ -1,4 +1,6 @@
 <?php
+include_once 'logging.php';
+
 class Router {
     private $routes = [];
 
@@ -15,26 +17,26 @@ class Router {
             'path' => $path,
             'callback' => $callback
         ];
-        $this->debug_log("Route added: {$method} {$path}");
+        debug_log("Route added: {$method} {$path}");
     }
 
     public function handleRequest() {
         $method = $_SERVER['REQUEST_METHOD'];
         $url = isset($_GET['url']) ? '/' . trim($_GET['url'], '/') : '/';
         
-        $this->debug_log("Handling request: {$method} {$url}");
+        debug_log("Handling request: {$method} {$url}");
 
         foreach ($this->routes as $route) {
             if ($route['method'] === $method) {
                 $params = $this->matchPath($route['path'], $url);
                 if ($params !== false) {
-                    $this->debug_log("Route matched: {$route['method']} {$route['path']}");
+                    debug_log("Route matched: {$route['method']} {$route['path']}");
                     return call_user_func($route['callback'], $params);
                 }
             }
         }
 
-        $this->debug_log("No matching route found for: {$method} {$url}", 'warning');
+        debug_log("No matching route found for: {$method} {$url}", 'warning');
         http_response_code(404);
         require_once 'frontend/404.php';
     }
