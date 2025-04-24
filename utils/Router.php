@@ -12,6 +12,10 @@ class Router {
         debug_log("Route added: {$method} {$path}");
     }
 
+    public function getRoutes(){
+        return $this->routes;
+    }
+
     public function handleRequest() {
         $method = $_SERVER['REQUEST_METHOD'];
         $url = isset($_GET['url']) ? '/' . trim($_GET['url'], '/') : '/';

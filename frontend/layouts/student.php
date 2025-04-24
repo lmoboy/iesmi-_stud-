@@ -1,8 +1,16 @@
-<html>
-<?php require_once "../components/Head.php" ?>
-    <body>
-    <?php require_once "../components/Navbar.php" ?>        
-    <?= $content ?>
-    
-    </body>
-</html>
+<?php
+
+View::partial('Head');
+View::partial('Navbar');
+
+
+?>
+<body class="bg-base-200 min-h-screen">
+<?= $content ?>
+</body>
+
+
+
+<?php
+View::partial('Footer');
+?>

@@ -80,6 +80,12 @@ if (!defined('DATABASE_INCLUDED')) {
 
             $sql = "INSERT INTO users (name, password, role) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin')";
             $this->query($sql);
+
+            $sql = "INSERT INTO users (name, password, role) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher')";
+            $this->query($sql);
+
+            $sql = "INSERT INTO users (name, password, role) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student')";
+            $this->query($sql);
         }
 
         public function query($sql, $params = [])
@@ -149,6 +155,10 @@ if (!defined('DATABASE_INCLUDED')) {
 
         public function update($table, $data, $conditions)
         {
+            if(!$conditions){
+                debug_log("DANGEOUR OPERATION", 'warning');
+                return false;
+            }
             debug_log("Updating record(s) in {$table}");
             $set = [];
             foreach ($data as $key => $value) {
@@ -177,6 +187,10 @@ if (!defined('DATABASE_INCLUDED')) {
 
         public function delete($table, $conditions)
         {
+            if(!$conditions){
+                debug_log("DANGEOUR OPERATION", 'warning');
+                return false;
+            }
             debug_log("Deleting record(s) from {$table}");
             $sql = "DELETE FROM {$table}";
 
