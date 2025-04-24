@@ -64,7 +64,7 @@ class View {
         }
         
         extract($data);
-        $partialFile = 'frontend/partials/' . $partial . '.php';
+        $partialFile = 'frontend/components/' . $partial . '.php';
         if (file_exists($partialFile)) {
             debug_log("Including partial file: {$partialFile}");
             require_once $partialFile;
