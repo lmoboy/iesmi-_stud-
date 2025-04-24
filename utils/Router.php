@@ -3,14 +3,6 @@ include_once 'logging.php';
 
 class Router {
     private $routes = [];
-
-    private function debug_log($message, $type = 'info') {
-        if (!DEBUG_ROUTER) return;
-        
-        $log_message = date('[Y-m-d H:i:s]') . " [ROUTER] [{$type}] {$message}\n";
-        error_log($log_message, 3, DEBUG_LOG_FILE);
-    }
-
     public function addRoute($method, $path, $callback) {
         $this->routes[] = [
             'method' => $method,
@@ -58,7 +50,7 @@ class Router {
                 return false;
             }
         }
-
+        debug_log("Route parameters: " . json_encode($params));
         return !empty($params) ? $params : ($routePath === $requestPath);
     }
 }

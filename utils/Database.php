@@ -13,15 +13,6 @@ if (!defined('DATABASE_INCLUDED')) {
         private $password = DB_PASS;
         private $conn;
 
-        private function debug_log($message, $type = 'info')
-        {
-            if (!DEBUG_DB)
-                return;
-
-            $log_message = date('[Y-m-d H:i:s]') . " [DB] [{$type}] {$message}\n";
-            error_log($log_message, 3, DEBUG_LOG_FILE);
-        }
-
         public function connect()
         {
             $this->conn = null;
@@ -87,7 +78,7 @@ if (!defined('DATABASE_INCLUDED')) {
         )";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role) VALUES ('admin@admin.com', '" . password_hash('admin@admin.com', PASSWORD_DEFAULT) . "', 'admin')";
+            $sql = "INSERT INTO users (name, password, role) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin')";
             $this->query($sql);
         }
 
