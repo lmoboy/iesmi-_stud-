@@ -1,9 +1,8 @@
 <?php
-include_once '../Database.php';
-include_once '../logging.php';
+include_once 'Database.php';
+include_once 'logging.php';
 
 class gradeController{
-
     private $db;
     function __construct()
     {
