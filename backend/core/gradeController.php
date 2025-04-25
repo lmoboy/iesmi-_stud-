@@ -37,7 +37,6 @@ class gradeController
 
     public function getUserGrades($userID)
     {
-
         return $this->db->read('grades', ['user_id' => $userID]);
     }
 

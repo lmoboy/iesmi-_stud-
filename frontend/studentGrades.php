@@ -15,25 +15,29 @@ $subjects = $subjectController->getSubjects();
 <table class="table w-full">
     <thead>
         <tr>
+            <th>Details</th>
             <th>Subject</th>
-            <th>Grade</th>
+            <th>Average Grade</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($subjects as $subject): ?>
             <tr>
+                <td><a href="subject?id=<?= $subject['id'] ?>" class="btn btn-primary">Detailed</a></td>
                 <td><?= $subject['name'] ?></td>
                 <td>
                     <?php
-                    $found = false;
+                    $totalGrade = 0;
+                    $gradeCount = 0;
                     foreach ($grades as $grade) {
                         if ($grade['subject_id'] == $subject['id']) {
-                            echo $grade['grade'];
-                            $found = true;
-                            break;
+                            $totalGrade += $grade['grade'];
+                            $gradeCount++;
                         }
                     }
-                    if (!$found) {
+                    if ($gradeCount > 0) {
+                        echo round($totalGrade / $gradeCount, 2);
+                    } else {
                         echo '-';
                     }
                     ?>

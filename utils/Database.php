@@ -65,7 +65,7 @@ if (!defined('DATABASE_INCLUDED')) {
 
             $sql = "CREATE TABLE IF NOT EXISTS subjects (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(100) NOT NULL,
+            name VARCHAR(100) NOT NULL UNIQUE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
             $this->query($sql);
@@ -73,11 +73,12 @@ if (!defined('DATABASE_INCLUDED')) {
             $sql = "CREATE TABLE IF NOT EXISTS grades(
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
-            subject_id INT NOT NULL,
             teacher_id INT NOT NULL,
-            grade INT NOT NULL,
+            subject_id INT NOT NULL,
+            grade INT NOT NULL CHECK (grade >= 1 AND grade <= 10),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (teacher_id) REFERENCES users(id),
             FOREIGN KEY (subject_id) REFERENCES subjects(id)    
         )";
             $this->query($sql);
@@ -102,32 +103,22 @@ if (!defined('DATABASE_INCLUDED')) {
             $sql = "INSERT INTO subjects (name) VALUES ('olybet casino')";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, teacher_id, grade) VALUES (1, 1, 2, 10)";
-            $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (1, 2, 2, 10)";
-            $this->query($sql);
+            $currentYear = date('Y'); 
+            $startDate = $currentYear . '-01-01 00:00:00';
+            $endDate = $currentYear . '-12-31 23:59:59';
+            $startTimestamp = strtotime($startDate);
+            $endTimestamp = strtotime($endDate);
+            
 
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (1, 3, 2, 10)";
-            $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 1, 2, 10)";
-            $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 2, 2, 10)";
-            $this->query($sql);
-
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 3, 2,10)";
-            $this->query($sql);
-
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 1, 2,10)";
-            $this->query($sql);
-
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 2, 2,10)";
-            $this->query($sql);
-
-            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 3, 2,10)";
-            $this->query($sql);
+            for ($i = 1; $i <= random_int(50, 200); $i++) {
+                $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
+                $randomSqlDateTime = date('Y-m-d H:i:s', $randomTimestamp);
+                $sql = "INSERT INTO grades (user_id, subject_id, teacher_id, grade, created_at) VALUES (" . random_int(1, 3) . ", " . random_int(1, 3) . ", " . random_int(1, 3) . ", " . random_int(1, 10) . ", '".$randomSqlDateTime."')";
+                $this->query($sql);
+            }
 
         }
 
