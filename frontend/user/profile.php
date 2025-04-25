@@ -45,7 +45,7 @@ $user = $_SESSION['user'];
                     </label>
                     <div class="avatar">
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img id="profile-picture-preview" src="https://placeimg.com/80/80/people" class="w-full rounded-full" />
+                            <img id="profile-picture-preview" src="<?= $_SESSION['user']['profile_picture'] ?>" class="w-full rounded-full" />
                         </div>
                         <input type="file" id="profile-picture" name="profile-picture" class="hidden" onchange="document.getElementById('profile-picture-preview').src = window.URL.createObjectURL(this.files[0])" />
                     </div>  
