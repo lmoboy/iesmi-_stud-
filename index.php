@@ -60,6 +60,15 @@ $router->addRoute("GET", "/grades", function () {
     View::render('studentGrades');
 });
 
+$router->addRoute("GET", "/subject", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    View::render('subjectGrades', ['id' => $_GET['id']]);
+});
+
+
 
 
 
