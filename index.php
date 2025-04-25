@@ -12,10 +12,10 @@
 </html>
 
 <?php
-require_once 'utils\config.php';
-require_once 'utils\Router.php';
-require_once 'utils\View.php';
-require_once 'utils\Database.php';
+require_once __DIR__ . '\utils\config.php';
+require_once __DIR__ . '\utils\Router.php';
+require_once __DIR__ . '\utils\View.php';
+require_once __DIR__ . '\utils\Database.php';
 
 $router = new Router();
 
@@ -43,13 +43,22 @@ $router->addRoute('GET', '/', function () {
     }
 });
 
-$router->addRoute('GET','/profile', function () {
+$router->addRoute('GET', '/profile', function () {
     if (isset($_SESSION['user'])) {
         View::render('user/profile');
     } else {
         header("Location: /");
         exit;
     }
+});
+
+
+$router->addRoute("GET", "/teacher", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    View::render('teacher');
 });
 
 

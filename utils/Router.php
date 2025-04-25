@@ -1,9 +1,11 @@
 <?php
 include_once 'logging.php';
 
-class Router {
+class Router
+{
     private $routes = [];
-    public function addRoute($method, $path, $callback) {
+    public function addRoute($method, $path, $callback)
+    {
         $this->routes[] = [
             'method' => $method,
             'path' => $path,
@@ -12,10 +14,11 @@ class Router {
         debug_log("Route added: {$method} {$path}");
     }
 
-    public function handleRequest() {
+    public function handleRequest()
+    {
         $method = $_SERVER['REQUEST_METHOD'];
         $url = isset($_GET['url']) ? '/' . trim($_GET['url'], '/') : '/';
-        
+
         debug_log("Handling request: {$method} {$url}");
 
         foreach ($this->routes as $route) {
@@ -30,10 +33,11 @@ class Router {
 
         debug_log("No matching route found for: {$method} {$url}", 'warning');
         http_response_code(404);
-        require_once 'frontend/404.php';
+        require_once __DIR__ . '\frontend\404.php';
     }
 
-    private function matchPath($routePath, $requestPath) {
+    private function matchPath($routePath, $requestPath)
+    {
         $routeParts = explode('/', trim($routePath, '/'));
         $requestParts = explode('/', trim($requestPath, '/'));
 

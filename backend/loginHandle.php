@@ -1,6 +1,6 @@
 <?php
-require_once 'utils\logging.php';
-require_once 'utils\Database.php';
+require_once __DIR__ .  'utils\logging.php';
+require_once __DIR__ . 'utils\Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     debug_log('Processing login attempt');

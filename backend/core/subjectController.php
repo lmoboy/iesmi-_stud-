@@ -9,12 +9,14 @@ class subjectController{
         $this->db = new Database();
     }
 
-    public function getSubjects(){
-        return $this->db->read ('subjects');
+    public function getSubjects()
+    {
+        return $this->db->read('subjects');
     }
 
-    public function createSubject($name){
-        if($_SESSION['user']['role'] !== 'admin' || $_SESSION['user']['role'] !== 'teacher'){
+    public function createSubject($name)
+    {
+        if ($_SESSION['user']['role'] !== 'admin' || $_SESSION['user']['role'] !== 'teacher') {
             return false;
         }
         return $this->db->create('subjects', ['name' => $name]);
