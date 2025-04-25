@@ -24,7 +24,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Debug Log File
-define('DEBUG_LOG_FILE', '../logs/debug.log');
+define('DEBUG_LOG_FILE', './logs/debug.log');
 
 // Create logs directory if it doesn't exist
 if (!file_exists('../logs')) {
