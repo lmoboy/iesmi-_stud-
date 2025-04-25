@@ -23,7 +23,7 @@ $router = new Router();
 //--------------------------------BACKEND--------------------------------
 
 $router->addRoute('POST', '/backend/login', function () {
-    require_once 'backend\loginHandle.php';
+    require_once './backend/loginHandle.php';
 });
 
 

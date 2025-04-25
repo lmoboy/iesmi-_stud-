@@ -1,22 +1,26 @@
 <?php
-// include_once "../utils/Database.php";
+
+require_once './backend/core/gradeController.php';
+require_once './backend/core/userController.php';
+require_once './backend/core/subjectController.php';
 
 if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
     header("Location: /");
     exit;
 }
-// $db = new Database;
-// 
+$uc = new userController;
+$gc = new gradeController;
+$sc = new subjectController;
 
-// $users = $db->read('users', ['id' => $_SESSION['user']['id']]);
-// if(count($users) == 0) {
-//     header("Location: /");
-//     exit;
-// }
-// if($users[0]['role'] != 'admin') {
-//     header("Location: /");
-//     exit;
-// }
+$users = $uc->getUsers();
+$grades = $gc->getGradesFormatted();
+$subjects = $sc->getSubjects();
+
+
+// echo "<pre>";
+// var_dump($grades);
+// echo "</pre>";
+
 ?>
 
 
@@ -41,17 +45,17 @@ if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i = 0; $i < 10; $i++): ?>
+                    <?php foreach($users as $user): ?>
                     <tr>
-                        <td><?= $i + 1 ?></td>
-                        <td>John Doe</td>
-                        <td>Student</td>
+                        <td><?= $user['id']?></td>
+                        <td><?= $user['name']?></td>
+                        <td><?= $user['role']?></td>
                         <td>
-                            <a href="/edit-user?id=<?= $i + 1 ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-user?id=<?= $i + 1 ?>" class="btn btn-error btn-sm">Delete</a>
+                            <a href="/edit-user?id=<?= $user['id']?>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/delete-user?id=<?= $user['id']?>" class="btn btn-error btn-sm">Delete</a>
                         </td>
                     </tr>
-                    <?php endfor; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             <a href="/add-user" class="btn btn-primary">Add User</a>
@@ -67,17 +71,17 @@ if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i = 0; $i < 10; $i++): ?>
+                    <?php foreach($grades as $grade): ?>
                     <tr>
-                        <td>John Doe</td>
-                        <td>Math</td>
-                        <td>90</td>
+                        <td><?=$grade["user"]?></td>
+                        <td><?=$grade["subject"]?></td>
+                        <td><?=$grade["grade"]?></td>
                         <td>
-                            <a href="/edit-grade?id=<?= $i + 1 ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-grade?id=<?= $i + 1 ?>" class="btn btn-error btn-sm">Delete</a>
+                            <a href="/edit-grade?id=<?= $grade["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/delete-grade?id=<?= $grade["id"] ?>" class="btn btn-error btn-sm">Delete</a>
                         </td>
                     </tr>
-                    <?php endfor; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             <a href="/add-grade" class="btn btn-primary">Add Grade</a>
@@ -92,16 +96,16 @@ if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i = 0; $i < 10; $i++): ?>
+                    <?php foreach($subjects as $subject): ?>
                     <tr>
-                        <td><?= $i + 1 ?></td>
-                        <td>Math</td>
+                        <td><?= $subject["id"] ?></td>
+                        <td><?= $subject["name"] ?></td>
                         <td>
-                            <a href="/edit-subject?id=<?= $i + 1 ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-subject?id=<?= $i + 1 ?>" class="btn btn-error btn-sm">Delete</a>
+                            <a href="/edit-subject?id=<?= $subject["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/delete-subject?id=<?= $subject["id"] ?>" class="btn btn-error btn-sm">Delete</a>
                         </td>
                     </tr>
-                    <?php endfor; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             <a href="/add-subject" class="btn btn-primary">Add Subject</a>
