@@ -4,8 +4,12 @@ require_once './backend/core/subjectController.php';
 
 $gradeController = new gradeController();
 $subjectController = new subjectController();
+
+
 $grades = $gradeController->getUserGrades($_SESSION['user']['id']);
 $subjects = $subjectController->getSubjects();
+
+
 
 ?>
 <table class="table w-full">

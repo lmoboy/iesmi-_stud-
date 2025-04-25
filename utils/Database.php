@@ -74,6 +74,7 @@ if (!defined('DATABASE_INCLUDED')) {
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT NOT NULL,
             subject_id INT NOT NULL,
+            teacher_id INT NOT NULL,
             grade INT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id),
@@ -94,38 +95,38 @@ if (!defined('DATABASE_INCLUDED')) {
 
             $sql = "INSERT INTO subjects (name) VALUES ('mathematics')";
             $this->query($sql);
-            
+
             $sql = "INSERT INTO subjects (name) VALUES ('history')";
             $this->query($sql);
-            
+
             $sql = "INSERT INTO subjects (name) VALUES ('olybet casino')";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 1, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id, teacher_id, grade) VALUES (1, 1, 2, 10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 2, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (1, 2, 2, 10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 3, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (1, 3, 2, 10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 1, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 1, 2, 10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 2, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 2, 2, 10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 3, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (2, 3, 2,10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 1, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 1, 2,10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 2, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 2, 2,10)";
             $this->query($sql);
 
-            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 3, 10)";  
+            $sql = "INSERT INTO grades (user_id, subject_id,teacher_id, grade) VALUES (3, 3, 2,10)";
             $this->query($sql);
 
         }
