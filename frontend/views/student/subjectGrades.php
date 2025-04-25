@@ -28,18 +28,6 @@ usort($dates, function ($a, $b) {
     return strtotime($a) - strtotime($b);
 });
 
-// echo "<pre>";
-// var_dump($dates);
-// echo "</pre>";
-// foreach ($dates as $date) {
-//     foreach ($grades as $grade) {
-//         if (getDateForDatabase($grade['created_at']) == $date) {
-//             echo "{$date}";
-//             echo "{$grade['grade']}\n";
-//         }
-//     }
-// }
-
 
 ?>
 <main>
