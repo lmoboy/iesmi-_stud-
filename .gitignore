@@ -1,2 +1,6 @@
 /logs
 ./logs/*.log
+
+
+/utils/config.php
+./utils/config.php
