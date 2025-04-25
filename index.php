@@ -16,6 +16,7 @@ require_once './utils/config.php';
 require_once './utils/Router.php';
 require_once './utils/View.php';
 require_once './utils/Database.php';
+require_once './utils/SMW.php';
 
 $router = new Router();
 
@@ -57,7 +58,11 @@ $router->addRoute("GET", "/grades", function () {
         header("Location: /");
         exit;
     }
-    View::render('student/studentGrades');
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+    }
+    View::render('student/studentGrades', ['user_id' => $userID]);
 });
 
 $router->addRoute("GET", "/subject", function () {
@@ -65,7 +70,11 @@ $router->addRoute("GET", "/subject", function () {
         header("Location: /");
         exit;
     }
-    View::render('student/subjectGrades', ['id' => $_GET['id']]);
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+    }
+    View::render('student/subjectGrades', ['id' => $_GET['id'], 'user_id' => $userID]);
 });
 
 $router->addRoute("GET", "/teacher", function () {
@@ -96,15 +105,15 @@ $router->addRoute("GET", "/student", function () {
 
 
 $router->addRoute("GET", "/admin", function () {
-    if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+    if (!isset($_SESSION['user']) || !SimpleMiddleWare::validRole('admin')) {
         header("Location: /");
         exit;
     }
-    View::render('admin');
+    View::render('admin/admin');
 });
 
 $router->addRoute("GET", "/add-user", function () {
-    if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+    if (!isset($_SESSION['user']) || !SimpleMiddleWare::validRole('admin')) {
         header("Location: /");
         exit;
     }
@@ -112,7 +121,7 @@ $router->addRoute("GET", "/add-user", function () {
 });
 
 $router->addRoute('GET', '/edit-user', function () {
-    if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
+    if (!isset($_SESSION['user']) || !SimpleMiddleWare::validRole('admin')) {
         header("Location: /");
         exit;
     }

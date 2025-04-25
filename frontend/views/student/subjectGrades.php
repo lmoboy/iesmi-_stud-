@@ -3,9 +3,10 @@
 require_once './backend/core/gradeController.php';
 require_once './backend/core/subjectController.php';
 $targetSubjectID = $data['id'] ?? header("Location: /grades");
+$userID = $data["user_id"] ?? $_SESSION['user']['id'];
 $gc = new gradeController;
 $sc = new subjectController;
-$grades = $gc->getGrades();
+$grades = $gc->getUserGrades($userID);
 $subject = $sc->getSubjects()[$targetSubjectID - 1];
 
 function getDateForDatabase($date)
@@ -15,9 +16,11 @@ function getDateForDatabase($date)
     return $date_formated;
 }
 
-
-$grades = array_filter($grades, function ($grade) use ($targetSubjectID) {
-    return $grade['subject_id'] == $targetSubjectID && $grade['user_id'] == $_SESSION['user']['id'];
+echo "<pre>";
+var_dump($grades[0]);
+echo "</pre>";
+$grades = array_filter($grades, function ($grade) use ($targetSubjectID, $userID) {
+    return $grade['subject_id'] == $targetSubjectID && $grade['user_id'] == $userID;
 });
 
 $dates = array_unique(array_map(function ($grade) {
