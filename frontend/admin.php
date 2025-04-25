@@ -65,6 +65,7 @@ $subjects = $sc->getSubjects();
                 <thead>
                     <tr>
                         <th>User</th>
+                        <th>Teacher</th>
                         <th>Subject</th>
                         <th>Grade</th>
                         <th></th>
@@ -74,6 +75,7 @@ $subjects = $sc->getSubjects();
                     <?php foreach($grades as $grade): ?>
                     <tr>
                         <td><?=$grade["user"]?></td>
+                        <td><?=$grade["teacher"]?></td>
                         <td><?=$grade["subject"]?></td>
                         <td><?=$grade["grade"]?></td>
                         <td>

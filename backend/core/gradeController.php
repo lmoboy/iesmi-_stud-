@@ -24,6 +24,7 @@ class gradeController
         foreach ($grades as $grade) {
             $formattedGrades[] = [
                 'user' => $users[$grade['user_id']-1]["name"],
+                'teacher' => $users[$grade['teacher_id']-1]["name"],
                 'subject' => $subjects[$grade['subject_id']-1]["name"],
                 'grade' => $grade['grade'],
                 'id' => $grade['id']

@@ -1,17 +1,17 @@
 # Project TODO List
 
 ## Last to do
-- [ ] Fix bugs
+- [x] Fix bugs
 - [ ] Add profile picture (pfp)
 - [ ] Export as CSV / PDF (implement export functionality for data tables)
 - [ ] Notifications (implement notification system)
 
 ## To Do
-- [ ] Add grade (UI + logic)
-- [ ] Add Admin "premade"
+- [x] Add grade (UI + logic)
+- [x] Add Admin "premade"
 - [ ] Validator class (create reusable validation logic)
 - [ ] Add teacher (UI + backend logic)
-- [ ] Admin page (dashboard for admin)
+- [x] Admin page (dashboard for admin)
 - [ ] Add subject (UI + backend logic)
 - [ ] Add student (UI + backend logic)
 
@@ -35,17 +35,16 @@
 - [ ] Create controller for exporting data (CSV/PDF)
 - [ ] Create notification controller (handle notifications logic)
 - [ ] Create authentication controller (login/logout/session)
-- [ ] Create controller for grades management
-- [ ] Create controller for subjects management
-- [ ] Create controller for teacher management
-- [ ] Create controller for student management
-- [ ] Create controller for admin dashboard
+- [x] Create controller for grades management
+- [x] Create controller for subjects management
+- [x] Create controller for teacher management
+- [x] Create controller for student management
+- [x] Create controller for admin dashboard
 
 ## Suggestions
-- [ ] Add unit tests for controllers
 - [ ] Improve error handling in controllers
-- [ ] Add logging for important actions
-- [ ] Review and refactor code for maintainability
+- [x] Add logging for important actions
+- [x] Review and refactor code for maintainability
 
 ---
 _Last updated: 2025-04-24_
