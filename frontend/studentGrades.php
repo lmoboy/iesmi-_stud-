@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '../backend/core/gradeController.php';
-require_once __DIR__ . '../backend/core/subjectController.php';
+require_once './backend/core/gradeController.php';
+require_once './backend/core/subjectController.php';
 
 $gradeController = new gradeController();
 $subjectController = new subjectController();
-$grades = $gradeController->getGrades($_SESSION['user']['id']);
+$grades = $gradeController->getUserGrades($_SESSION['user']['id']);
 $subjects = $subjectController->getSubjects();
 
 ?>
