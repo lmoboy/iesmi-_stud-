@@ -33,7 +33,7 @@ class View {
         extract(self::$data);
         
         // Include the view file
-        $viewFile = 'frontend/' . $view . '.php';
+        $viewFile = './frontend/' . $view . '.php';
         if (file_exists($viewFile)) {
             debug_log("Loading view file: {$viewFile}");
             require_once $viewFile;
@@ -47,7 +47,7 @@ class View {
         $content = ob_get_clean();
         
         // Render the layout with the view content
-        $layoutFile = 'frontend/layouts/' . self::$layout . '.php';
+        $layoutFile = './frontend/layouts/' . self::$layout . '.php';
         if (file_exists($layoutFile)) {
             debug_log("Loading layout: {$layoutFile}");
             require_once $layoutFile;
@@ -64,7 +64,7 @@ class View {
         }
         
         extract($data);
-        $partialFile = 'frontend/components/' . $partial . '.php';
+        $partialFile = './frontend/components/' . $partial . '.php';
         if (file_exists($partialFile)) {
             debug_log("Including partial file: {$partialFile}");
             require_once $partialFile;
