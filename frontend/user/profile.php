@@ -11,10 +11,10 @@ $user = $_SESSION['user'];
     <div class="w-2/3 max-w-4xl p-4 space-y-4 bg-base-100 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center text-primary">Profile</h1>
         <div class="tabs">
-            <a class="tab tab-lg tab-bordered tab-active" href="#security">Security</a>
-            <a class="tab tab-lg tab-bordered" href="#personalisation">Personalisation</a>
+            <a class="tab tab-lg tab-bordered" href="#security">Security</a>
+            <a class="tab tab-lg tab-bordered tab-active" href="#personalisation">Personalisation</a>
         </div>
-        <div id="security" class="tabs what flex flex-col p-4">
+        <div id="security" class="tabs what flex flex-col hidden p-4">
             <h2 class="text-xl font-bold text-center">Security</h2>
             <p class="text-center">Change your password here.</p>
             <form method="POST" class="space-y-4">
@@ -35,7 +35,7 @@ $user = $_SESSION['user'];
                 </div>
             </form>
         </div>
-        <div id="personalisation" class="tabs what flex flex-col p-4 hidden">
+        <div id="personalisation" class="tabs what flex flex-col p-4">
             <h2 class="text-xl font-bold text-center">Personalisation</h2>
             <p class="text-center">Change your name here.</p>
             <form method="POST" class="space-y-4">
