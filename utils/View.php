@@ -33,7 +33,7 @@ class View {
         extract(self::$data);
         
         // Include the view file
-        $viewFile = './frontend/' . $view . '.php';
+        $viewFile = './frontend/views/' . $view . '.php';
         if (file_exists($viewFile)) {
             debug_log("Loading view file: {$viewFile}");
             require_once $viewFile;

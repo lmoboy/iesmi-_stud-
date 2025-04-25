@@ -37,9 +37,9 @@ $router->addRoute('GET', '/backend/logout', function () {
 //--------------------------------FRONTEND--------------------------------
 $router->addRoute('GET', '/', function () {
     if (isset($_SESSION['user'])) {
-        View::render('home');
+        View::render('generic/home');
     } else {
-        View::render('login');
+        View::render('generic/login');
     }
 });
 
@@ -57,7 +57,7 @@ $router->addRoute("GET", "/grades", function () {
         header("Location: /");
         exit;
     }
-    View::render('studentGrades');
+    View::render('student/studentGrades');
 });
 
 $router->addRoute("GET", "/subject", function () {
@@ -65,27 +65,15 @@ $router->addRoute("GET", "/subject", function () {
         header("Location: /");
         exit;
     }
-    View::render('subjectGrades', ['id' => $_GET['id']]);
+    View::render('student/subjectGrades', ['id' => $_GET['id']]);
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 $router->addRoute("GET", "/teacher", function () {
     if (!isset($_SESSION['user'])) {
         header("Location: /");
         exit;
     }
-    View::render('teacher');
+    View::render('teacher/teacher');
 });
 
 $router->addRoute("GET", "/student", function () {
