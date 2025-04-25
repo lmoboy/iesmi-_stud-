@@ -202,7 +202,7 @@ if (!defined('DATABASE_INCLUDED')) {
         public function update($table, $data, $conditions)
         {
             if (!$conditions) {
-                debug_log("DANGEOUR OPERATION", 'warning');
+                debug_log("DANGEROUS OPERATION", 'warning');
                 return false;
             }
             debug_log("Updating record(s) in {$table}");
@@ -234,7 +234,7 @@ if (!defined('DATABASE_INCLUDED')) {
         public function delete($table, $conditions)
         {
             if (!$conditions) {
-                debug_log("DANGEOUR OPERATION", 'warning');
+                debug_log("DANGEROUS OPERATION", 'warning');
                 return false;
             }
             debug_log("Deleting record(s) from {$table}");
