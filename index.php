@@ -52,6 +52,24 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
+$router->addRoute("GET", "/grades", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    View::render('studentGrades');
+});
+
+
+
+
+
+
+
+
+
+
+
 
 $router->addRoute("GET", "/teacher", function () {
     if (!isset($_SESSION['user'])) {
@@ -61,7 +79,13 @@ $router->addRoute("GET", "/teacher", function () {
     View::render('teacher');
 });
 
-
+$router->addRoute("GET", "/student", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    View::render('student');
+});
 
 
 

@@ -1,6 +1,6 @@
 <?php
-include_once 'Database.php';
-include_once 'logging.php';
+include_once './utils/Database.php';
+include_once './utils/logging.php';
 
 class gradeController{
     private $db;
@@ -9,9 +9,17 @@ class gradeController{
         $this->db = new Database();
     }
 
-    public function getGrades($userID){
+    public function getGrades(){
+        return $this->db->read('grades');
+    }
+
+    public function getUserGrades($userID){
 
         return $this->db->read('grades', ['user_id' => $userID]);
+    }
+
+    public function getSubjectGrades($subjectID){
+        return $this->db->read('grades', ['subject_id' => $subjectID]);
     }
 
     public function setGrades($userID, $subjectID, $grade){

@@ -1,6 +1,7 @@
 <?php
-include_once 'Database.php';
-include_once 'logging.php';
+include_once './utils/Database.php';
+include_once './utils/logging.php';
+
 
 class userController{
     private $db;

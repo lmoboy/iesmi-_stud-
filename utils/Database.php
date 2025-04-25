@@ -89,6 +89,45 @@ if (!defined('DATABASE_INCLUDED')) {
 
             $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
             $this->query($sql);
+
+
+
+            $sql = "INSERT INTO subjects (name) VALUES ('mathematics')";
+            $this->query($sql);
+            
+            $sql = "INSERT INTO subjects (name) VALUES ('history')";
+            $this->query($sql);
+            
+            $sql = "INSERT INTO subjects (name) VALUES ('olybet casino')";
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 1, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 2, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (1, 3, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 1, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 2, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (2, 3, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 1, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 2, 10)";  
+            $this->query($sql);
+
+            $sql = "INSERT INTO grades (user_id, subject_id, grade) VALUES (3, 3, 10)";  
+            $this->query($sql);
+
         }
 
         public function query($sql, $params = [])
