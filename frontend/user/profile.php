@@ -1,8 +1,4 @@
 <?php
-
-View::partial('Head');
-View::partial('Navbar');
-
 $user = $_SESSION['user'];
 
 ?>
@@ -64,9 +60,6 @@ $user = $_SESSION['user'];
     </div>
 </main>
 
-<?php
-View::partial('Footer');
-?>
     <script>
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tabs.what');

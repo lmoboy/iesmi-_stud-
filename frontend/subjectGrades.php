@@ -28,13 +28,24 @@ usort($dates, function ($a, $b) {
     return strtotime($a) - strtotime($b);
 });
 
+// echo "<pre>";
+// var_dump($dates);
+// echo "</pre>";
+// foreach ($dates as $date) {
+//     foreach ($grades as $grade) {
+//         if (getDateForDatabase($grade['created_at']) == $date) {
+//             echo "{$date}";
+//             echo "{$grade['grade']}\n";
+//         }
+//     }
+// }
 
 
 ?>
 <main>
     <div>
         <h1 style="text-align: center; font-size: 2em; font-weight: bold;">Subject Grades</h1>
-        <h2 style="text-align: center; font-size: 1.5em;"><?= htmlspecialchars($subject['name']) ?></h2>
+        <h2 style="text-align: center; font-size: 1.5em;"><?= htmlspecialchars(ucfirst($subject['name'])) ?></h2>
     </div>
     <div class="overflow-x-auto">
         <table class="table w-full">
@@ -46,19 +57,22 @@ usort($dates, function ($a, $b) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($grades as $grade): ?>
-                    <tr>
-                        <?php foreach ($dates as $date): ?>
-                            <?php if (getDateForDatabase($grade['created_at']) == $date): ?>
-                                <td><?= htmlspecialchars($grade['grade']) ?></td>
-                                <?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'teacher'): ?>
-                                    <td><a href="/edit-grade?id=<?= $grade['id'] ?>" class="btn btn-primary">Edit</a></td>
+                <tr class="border border-gray-300">
+                    <?php foreach ($dates as $date): ?>
+                        <td class="border border-gray-300">
+                            <?php foreach ($grades as $grade): ?>
+                                <?php if (getDateForDatabase($grade['created_at']) == $date): ?>
+                                    <?= htmlspecialchars($grade['grade']) ?>
                                 <?php endif; ?>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </tr>
-                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
             </tbody>
         </table>
     </div>
 </main>
+<!-- 
+<?php if ($_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'teacher'): ?>
+                                    <td><a href="/edit-grade?id=<?= $grade['id'] ?>" class="btn btn-primary">Edit</a></td>
+                                <?php endif; ?> -->
