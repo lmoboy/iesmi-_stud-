@@ -24,9 +24,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Debug Log File
-define('DEBUG_LOG_FILE', __DIR__ . '../../logs/debug.log');
+define('DEBUG_LOG_FILE', '../logs/debug.log');
 
 // Create logs directory if it doesn't exist
-if (!file_exists(__DIR__ . '../../logs')) {
-    mkdir(__DIR__ . '../../logs', 0777, true);
+if (!file_exists('../logs')) {
+    mkdir('../logs', 0777, true);
 }
