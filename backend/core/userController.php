@@ -11,28 +11,28 @@ class userController{
     }
 
     public function getUsers(){
-        return $this->db->read ('users');
+        return $this->db->read('users', [], 'name, profile_picture, role, id');
     }
 
     public function getUser($id){
-        return $this->db->read('users', ['id' => $id]);
+        return $this->db->read('users', ['id' => $id], 'name, profile_picture, role, id');
     }
 
     public function createUser($name, $password, $role){
-        if($_SESSION['user']['role'] !== 'admin'){
+        if(SimpleMiddleWare::validRole('admin')){
             return false;
         }
         return $this->db->create('users', ['name' => $name, 'password' => $password, 'role' => $role]);
     }
 
     public function editUser($name, $password, $id){
-        if($_SESSION['user']['role'] !== 'admin'){
+        if(SimpleMiddleWare::validRole('admin')){
             return false;
         }
         return $this->db->update('users', ['name' => $name, 'password' => $password], ['id' => $id]);
     }
     public function deleteUser($id){
-        if($_SESSION['user']['role'] !== 'admin'){
+        if(SimpleMiddleWare::validRole('admin')){
             return false;
         }
         return $this->db->delete('users', ['id' => $id]);
