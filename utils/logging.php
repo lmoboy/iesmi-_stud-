@@ -10,6 +10,7 @@ function debug_log($message, $type = 'info')
         $file = $file[0]['file'];
         $file = explode('/', $file);
         $file = $file[count($file) - 1];
+        $file = explode('.php', $file)[0];
         $file = strtoupper($file);
     } else if ($os === "Windows") {
         $file = $file[0]['file'];
