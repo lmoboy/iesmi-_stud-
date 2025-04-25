@@ -1,6 +1,6 @@
 <?php
-require_once '../backend/core/gradeController.php';
-require_once '../backend/core/subjectController.php';
+require_once __DIR__ . '../backend/core/gradeController.php';
+require_once __DIR__ . '../backend/core/subjectController.php';
 
 $gradeController = new gradeController();
 $subjectController = new subjectController();
