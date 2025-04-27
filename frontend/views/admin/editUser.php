@@ -17,11 +17,15 @@ if (!$user) {
 ?>
 
 <form method="POST" class="space-y-4">
+    <?php if (isset($error)): ?>
+        <div class="alert alert-error mt-4"><?= $error ?></div>
+    <?php endif; ?>
     <div class="form-control">
         <label class="label" for="name">
             <span class="label-text">Name</span>
         </label>
-        <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required class="input input-bordered w-full" />
+        <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required
+            class="input input-bordered w-full" />
     </div>
     <div class="form-control">
         <label class="label" for="password">
@@ -42,7 +46,5 @@ if (!$user) {
     <div class="form-control mt-6">
         <button type="submit" class="btn btn-primary w-full">Edit User</button>
     </div>
-    <?php if (isset($error)): ?>
-        <div class="alert alert-error mt-4"><?= $error ?></div>
-    <?php endif; ?>
+
 </form>
