@@ -14,10 +14,20 @@ class gradeController
     {
         return $this->db->read('grades');
     }
-
-    public function getGradeById($id){
-        return $this->db->read('grades', ['id'=>$id]);
+    public function getGradeById($id)
+    {
+        return $this->db->read('grades', ['id' => $id]);
     }
+
+    public function getSubjectGrades($subjectID)
+    {
+        return $this->db->read('grades', ['subject_id' => $subjectID]);
+    }
+    public function getUserGrades($id)
+    {
+        return $this->db->read('grades', ['user_id' => $id]);
+    }
+
     public function getGradesFormatted()
     {
         $grades = $this->getGrades();
@@ -27,9 +37,9 @@ class gradeController
         $formattedGrades = [];
         foreach ($grades as $grade) {
             $formattedGrades[] = [
-                'user' => $users[$grade['user_id']-1]["name"],
-                'teacher' => $users[$grade['teacher_id']-1]["name"],
-                'subject' => $subjects[$grade['subject_id']-1]["name"],
+                'user' => $users[$grade['user_id'] - 1]["name"],
+                'teacher' => $users[$grade['teacher_id'] - 1]["name"],
+                'subject' => $subjects[$grade['subject_id'] - 1]["name"],
                 'grade' => $grade['grade'],
                 'id' => $grade['id']
             ];
@@ -38,16 +48,6 @@ class gradeController
         return $formattedGrades;
     }
 
-
-    public function getUserGrades($userID)
-    {
-        return $this->db->read('grades', ['user_id' => $userID]);
-    }
-
-    public function getSubjectGrades($subjectID)
-    {
-        return $this->db->read('grades', ['subject_id' => $subjectID]);
-    }
 
     public function addGrades($userID, $subjectID, $grade)
     {
