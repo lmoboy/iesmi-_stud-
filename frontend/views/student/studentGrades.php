@@ -4,10 +4,9 @@ require_once './backend/core/subjectController.php';
 
 $gradeController = new gradeController();
 $subjectController = new subjectController();
-
-$grades = $gradeController->getUserGrades($data['user_id'] ?? $_SESSION['user']['id']);
+$user = $data['user_id'] ?? $_SESSION['user']['id'];
+$grades = $gradeController->getUserGrades($user);
 $subjects = $subjectController->getSubjects();
-
 
 
 ?>
@@ -22,7 +21,7 @@ $subjects = $subjectController->getSubjects();
     <tbody>
         <?php foreach ($subjects as $subject): ?>
             <tr>
-                <td><a href="subject?id=<?=$subject['id'] ?>&<?= $data['id'] ? "?user_id=".$data['id'] : ''?>" class="btn btn-primary">Detailed</a></td>
+                <td><a href="subject?id=<?=$subject['id'] ?><?= $user ? "&?user_id=".$user : ''?>" class="btn btn-primary">Detailed</a></td>
                 <td><?= $subject['name'] ?></td>
                 <td>
                     <?php

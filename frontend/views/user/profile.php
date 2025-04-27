@@ -18,13 +18,15 @@ $user = $_SESSION['user'];
                     <label class="label" for="old-password">
                         <span class="label-text">Old password</span>
                     </label>
-                    <input type="password" id="old-password" name="old-password" required class="input input-bordered w-full" />
+                    <input type="password" id="old-password" name="old-password" required
+                        class="input input-bordered w-full" />
                 </div>
                 <div class="form-control">
                     <label class="label" for="new-password">
                         <span class="label-text">New password</span>
                     </label>
-                    <input type="password" id="new-password" name="new-password" required class="input input-bordered w-full" />
+                    <input type="password" id="new-password" name="new-password" required
+                        class="input input-bordered w-full" />
                 </div>
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Change password</button>
@@ -41,16 +43,20 @@ $user = $_SESSION['user'];
                     </label>
                     <div class="avatar">
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img id="profile-picture-preview" src="<?= $_SESSION['user']['profile_picture'] ?>" class="w-full rounded-full" />
+
+                            <img id="profile-picture-preview" src="/backend/files/<?=$_SESSION['user']['profile_picture']?>.jpg"
+                                class="w-full rounded-full" />
                         </div>
-                        <input type="file" id="profile-picture" name="profile-picture" class="hidden" onchange="document.getElementById('profile-picture-preview').src = window.URL.createObjectURL(this.files[0])" />
-                    </div>  
+                        <input type="file" id="profile-picture" name="profile-picture" class="hidden"
+                            onchange="document.getElementById('profile-picture-preview').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
                 </div>
                 <div class="form-control">
                     <label class="label" for="name">
                         <span class="label-text">Name</span>
                     </label>
-                    <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required class="input input-bordered w-full" />
+                    <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required
+                        class="input input-bordered w-full" />
                 </div>
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Change name</button>
@@ -60,26 +66,39 @@ $user = $_SESSION['user'];
     </div>
 </main>
 
-    <script>
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tabs.what');
+<script>
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const id = this.getAttribute('href');
-                tab.classList.add('tab-active');
-                tabs.forEach(tab => {
-                    if (tab.getAttribute('href') !== id) {
-                        tab.classList.remove('tab-active');
-                    }
-                });
-                tabContents.forEach(tabContent => {
-                    if (tabContent.id === id.substring(1)) {
-                        tabContent.classList.remove('hidden');
-                    } else {
-                        tabContent.classList.add('hidden');
-                    }
-                });
+    
+
+
+
+
+
+
+
+
+
+
+
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tabs.what');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const id = this.getAttribute('href');
+            tab.classList.add('tab-active');
+            tabs.forEach(tab => {
+                if (tab.getAttribute('href') !== id) {
+                    tab.classList.remove('tab-active');
+                }
+            });
+            tabContents.forEach(tabContent => {
+                if (tabContent.id === id.substring(1)) {
+                    tabContent.classList.remove('hidden');
+                } else {
+                    tabContent.classList.add('hidden');
+                }
             });
         });
-    </script>
+    });
+</script>
