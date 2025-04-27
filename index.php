@@ -82,6 +82,18 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
+$router->addRoute('GET', '/grade', function(){
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+    }
+    View::render('student/studentGrade', ['user_id'=>$userID, 'id'=>$_GET['id']]);
+});
+
 $router->addRoute("GET", "/grades", function () {
     if (!isset($_SESSION['user'])) {
         header("Location: /");
@@ -100,10 +112,6 @@ $router->addRoute("GET", "/subject", function () {
         exit;
     }
     $userID = $_SESSION['user']['id'];
-    // debug_log("Session ID:" . $userID);
-    // debug_log("GET param not empty" . isset($_GET['user_id']) ? "TRUE" : "FALSE");
-    // debug_log("User has vaild role:" . SimpleMiddleWare::validRole('teacher, admin') ? "TRUE" : "FALSE");
-
     if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
         $userID = $_GET['user_id'];
         debug_log("ID changed to:" . $userID);

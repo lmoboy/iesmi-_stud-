@@ -1,6 +1,4 @@
-<?php
-
-require_once './backend/core/gradeController.php';
+<?php require_once './backend/core/gradeController.php';
 require_once './backend/core/subjectController.php';
 $targetSubjectID = $data['id'] ?? header("Location: /grades");
 $userID = $data["user_id"] ?? $_SESSION['user']['id'];
@@ -28,13 +26,6 @@ usort($dates, function ($a, $b) {
     return strtotime($a) - strtotime($b);
 });
 
-
-
-echo "<pre>";
-// var_dump($grades);
-echo "</pre>";
-
-
 ?>
 <main>
     <div>
@@ -56,7 +47,9 @@ echo "</pre>";
                         <td class="border border-gray-300">
                             <?php foreach ($grades as $grade): ?>
                                 <?php if (getDateForDatabase($grade['created_at']) == $date): ?>
-                                    <?= htmlspecialchars($grade['grade']) ?>
+                                    <a href="/grade?id=<?= $grade['id'] ?>">
+                                        <?= htmlspecialchars($grade['grade']) ?>
+                                    </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </td>
