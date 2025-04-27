@@ -73,6 +73,12 @@ $router->addRoute('GET', '/', function () {
     }
 });
 
+$router->addRoute('GET', '/csvt', function(){
+    require_once './backend/handlers/csvExport.php';
+});
+
+
+
 $router->addRoute('GET', '/profile', function () {
     if (isset($_SESSION['user'])) {
         View::render('user/profile');
