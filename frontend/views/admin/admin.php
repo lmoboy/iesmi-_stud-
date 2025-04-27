@@ -4,10 +4,6 @@ require_once './backend/core/gradeController.php';
 require_once './backend/core/userController.php';
 require_once './backend/core/subjectController.php';
 
-if (!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
-    header("Location: /");
-    exit;
-}
 $uc = new userController;
 $gc = new gradeController;
 $sc = new subjectController;

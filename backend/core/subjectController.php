@@ -10,9 +10,15 @@ class subjectController{
         $this->db = new Database();
     }
 
+
+
     public function getSubjects()
     {
         return $this->db->read('subjects');
+    }
+
+    public function getSubjectById($id){
+        return $this->db->read('subjects', ['id'=>$id]);
     }
 
     public function createSubject($name)

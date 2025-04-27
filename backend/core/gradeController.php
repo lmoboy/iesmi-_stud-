@@ -14,6 +14,10 @@ class gradeController
     {
         return $this->db->read('grades');
     }
+
+    public function getGradeById($id){
+        return $this->db->read('grades', ['id'=>$id]);
+    }
     public function getGradesFormatted()
     {
         $grades = $this->getGrades();
@@ -43,11 +47,6 @@ class gradeController
     public function getSubjectGrades($subjectID)
     {
         return $this->db->read('grades', ['subject_id' => $subjectID]);
-    }
-
-    public function setGrades($userID, $subjectID, $grade)
-    {
-        return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade]);
     }
 
     public function addGrades($userID, $subjectID, $grade)
