@@ -24,15 +24,44 @@ $router = new Router();
 //--------------------------------BACKEND--------------------------------
 
 $router->addRoute('POST', '/backend/login', function () {
-    require_once './backend/loginHandle.php';
+    require_once './backend/handlers/auth.php';
 });
 
 
 $router->addRoute('GET', '/backend/logout', function () {
     session_destroy();
     header('Location: /');
-    exit();
+    exit;
 });
+
+$router->addRoute('GET', '/backend/files/get', function () {
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $pictureName = $_GET['picture'];
+
+    foreach ($allowedExtensions as $extension) {
+        $filePath = __DIR__ . '/backend/files/' . $pictureName . '.' . $extension;
+        if (file_exists($filePath)) {
+
+            header('content-type: image/jpeg');
+            switch (pathinfo($filePath)['extension']) {
+                case 'png':
+                    $image = imagecreatefrompng($filePath);
+                    break;
+                case 'gif':
+                    $image = imagecreatefromgif($filePath);
+                    break;
+                default:
+                    $image = imagecreatefromjpeg($filePath);
+            }
+
+            echo imagejpeg($image);
+            imagedestroy($image);
+        }
+    }
+    http_response_code(404);
+    echo "File not found.";
+});
+
 
 
 //--------------------------------FRONTEND--------------------------------
@@ -71,9 +100,17 @@ $router->addRoute("GET", "/subject", function () {
         exit;
     }
     $userID = $_SESSION['user']['id'];
+    // debug_log("Session ID:" . $userID);
+    // debug_log("GET param not empty" . isset($_GET['user_id']) ? "TRUE" : "FALSE");
+    // debug_log("User has vaild role:" . SimpleMiddleWare::validRole('teacher, admin') ? "TRUE" : "FALSE");
+
     if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
         $userID = $_GET['user_id'];
+        debug_log("ID changed to:" . $userID);
     }
+    debug_log("Final user ID:" . $userID);
+
+
     View::render('student/subjectGrades', ['id' => $_GET['id'], 'user_id' => $userID]);
 });
 

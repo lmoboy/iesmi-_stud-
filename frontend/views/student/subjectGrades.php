@@ -16,11 +16,8 @@ function getDateForDatabase($date)
     return $date_formated;
 }
 
-echo "<pre>";
-var_dump($grades[0]);
-echo "</pre>";
-$grades = array_filter($grades, function ($grade) use ($targetSubjectID, $userID) {
-    return $grade['subject_id'] == $targetSubjectID && $grade['user_id'] == $userID;
+$grades = array_filter($grades, function ($grade) use ($targetSubjectID) {
+    return $grade['subject_id'] == $targetSubjectID;
 });
 
 $dates = array_unique(array_map(function ($grade) {
@@ -30,6 +27,12 @@ $dates = array_unique(array_map(function ($grade) {
 usort($dates, function ($a, $b) {
     return strtotime($a) - strtotime($b);
 });
+
+
+
+echo "<pre>";
+// var_dump($grades);
+echo "</pre>";
 
 
 ?>

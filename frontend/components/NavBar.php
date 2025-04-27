@@ -9,7 +9,7 @@
                 <div class="dropdown dropdown-end">
                     <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                            <img src="<?= $_SESSION['user']['profile_picture'] ?>" />
+                            <img src="/backend/files/<?=$_SESSION['user']['profile_picture']?>.jpg"/>
                         </div>
                     </label>
                     <ul tabindex="0" class="mt-3 p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
@@ -21,3 +21,6 @@
             <?php endif; ?>
         </div>
     </div>
+
+
+    <!-- /backend/files/get?picture=<?= $_SESSION['user']['profile_picture'] ?> -->
