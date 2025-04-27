@@ -83,13 +83,13 @@ if (!defined('DATABASE_INCLUDED')) {
         )";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin', 'admin')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher', 'teacher')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'http://www.businessinsider.com/most-powerful-women-engineers-in-2015-2015-5?op=1')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'student')";
             $this->query($sql);
 
 

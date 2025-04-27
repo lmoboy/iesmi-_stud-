@@ -1,11 +1,10 @@
-<?php
-
-require_once './backend/core/gradeController.php';
+<?php require_once './backend/core/gradeController.php';
 require_once './backend/core/subjectController.php';
 $targetSubjectID = $data['id'] ?? header("Location: /grades");
+$userID = $data["user_id"] ?? $_SESSION['user']['id'];
 $gc = new gradeController;
 $sc = new subjectController;
-$grades = $gc->getGrades();
+$grades = $gc->getUserGrades($userID);
 $subject = $sc->getSubjects()[$targetSubjectID - 1];
 
 function getDateForDatabase($date)
@@ -15,9 +14,8 @@ function getDateForDatabase($date)
     return $date_formated;
 }
 
-
 $grades = array_filter($grades, function ($grade) use ($targetSubjectID) {
-    return $grade['subject_id'] == $targetSubjectID && $grade['user_id'] == $_SESSION['user']['id'];
+    return $grade['subject_id'] == $targetSubjectID;
 });
 
 $dates = array_unique(array_map(function ($grade) {
@@ -27,7 +25,6 @@ $dates = array_unique(array_map(function ($grade) {
 usort($dates, function ($a, $b) {
     return strtotime($a) - strtotime($b);
 });
-
 
 ?>
 <main>
@@ -50,7 +47,9 @@ usort($dates, function ($a, $b) {
                         <td class="border border-gray-300">
                             <?php foreach ($grades as $grade): ?>
                                 <?php if (getDateForDatabase($grade['created_at']) == $date): ?>
-                                    <?= htmlspecialchars($grade['grade']) ?>
+                                    <a href="/grade?id=<?= $grade['id'] ?>">
+                                        <?= htmlspecialchars($grade['grade']) ?>
+                                    </a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </td>

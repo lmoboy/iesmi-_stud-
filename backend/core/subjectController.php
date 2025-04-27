@@ -10,28 +10,34 @@ class subjectController{
         $this->db = new Database();
     }
 
+
+
     public function getSubjects()
     {
         return $this->db->read('subjects');
     }
 
+    public function getSubjectById($id){
+        return $this->db->read('subjects', ['id'=>$id]);
+    }
+
     public function createSubject($name)
     {
-        if ($_SESSION['user']['role'] !== 'admin' || $_SESSION['user']['role'] !== 'teacher') {
+        if (SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
         return $this->db->create('subjects', ['name' => $name]);
     }
 
     public function editSubject($subjectID, $name){
-        if($_SESSION['user']['role'] !== 'admin' || $_SESSION['user']['role'] !== 'teacher'){
+        if(SimpleMiddleWare::validRole('teacher,admin')){
             return false;
         }
         return $this->db->update('subjects', ['name' => $name], ['id' => $subjectID]);
     }
 
     public function deleteSubject($subjectID){
-        if($_SESSION['user']['role'] !== 'admin' || $_SESSION['user']['role'] !== 'teacher'){
+        if(SimpleMiddleWare::validRole('teacher,admin')){
             return false;
         }
         return $this->db->delete('subjects', ['id' => $subjectID]);

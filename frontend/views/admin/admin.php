@@ -4,10 +4,6 @@ require_once './backend/core/gradeController.php';
 require_once './backend/core/userController.php';
 require_once './backend/core/subjectController.php';
 
-if(!isset($_SESSION["user"]) || $_SESSION["user"]["role"] != "admin") {
-    header("Location: /");
-    exit;
-}
 $uc = new userController;
 $gc = new gradeController;
 $sc = new subjectController;
@@ -15,11 +11,6 @@ $sc = new subjectController;
 $users = $uc->getUsers();
 $grades = $gc->getGradesFormatted();
 $subjects = $sc->getSubjects();
-
-
-// echo "<pre>";
-// var_dump($grades);
-// echo "</pre>";
 
 ?>
 
@@ -45,16 +36,17 @@ $subjects = $sc->getSubjects();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($users as $user): ?>
-                    <tr>
-                        <td><?= $user['id']?></td>
-                        <td><?= $user['name']?></td>
-                        <td><?= $user['role']?></td>
-                        <td>
-                            <a href="/edit-user?id=<?= $user['id']?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-user?id=<?= $user['id']?>" class="btn btn-error btn-sm">Delete</a>
-                        </td>
-                    </tr>
+                    <?php foreach ($users as $user): ?>
+                        <tr>
+                            <td><?= $user['id'] ?></td>
+                            <td><?= $user['name'] ?></td>
+                            <td><?= $user['role'] ?></td>
+                            <td>
+                                <a href="/grades?user_id=<?= $user['id'] ?>" class="btn btn-primary btn-sm">View grades</a>
+                                <a href="/edit-user?id=<?= $user['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/delete-user?id=<?= $user['id'] ?>" class="btn btn-error btn-sm">Delete</a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -72,17 +64,17 @@ $subjects = $sc->getSubjects();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($grades as $grade): ?>
-                    <tr>
-                        <td><?=$grade["user"]?></td>
-                        <td><?=$grade["teacher"]?></td>
-                        <td><?=$grade["subject"]?></td>
-                        <td><?=$grade["grade"]?></td>
-                        <td>
-                            <a href="/edit-grade?id=<?= $grade["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-grade?id=<?= $grade["id"] ?>" class="btn btn-error btn-sm">Delete</a>
-                        </td>
-                    </tr>
+                    <?php foreach ($grades as $grade): ?>
+                        <tr>
+                            <td><?= $grade["user"] ?></td>
+                            <td><?= $grade["teacher"] ?></td>
+                            <td><?= $grade["subject"] ?></td>
+                            <td><?= $grade["grade"] ?></td>
+                            <td>
+                                <a href="/edit-grade?id=<?= $grade["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/delete-grade?id=<?= $grade["id"] ?>" class="btn btn-error btn-sm">Delete</a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -98,15 +90,15 @@ $subjects = $sc->getSubjects();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($subjects as $subject): ?>
-                    <tr>
-                        <td><?= $subject["id"] ?></td>
-                        <td><?= $subject["name"] ?></td>
-                        <td>
-                            <a href="/edit-subject?id=<?= $subject["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/delete-subject?id=<?= $subject["id"] ?>" class="btn btn-error btn-sm">Delete</a>
-                        </td>
-                    </tr>
+                    <?php foreach ($subjects as $subject): ?>
+                        <tr>
+                            <td><?= $subject["id"] ?></td>
+                            <td><?= $subject["name"] ?></td>
+                            <td>
+                                <a href="/edit-subject?id=<?= $subject["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/delete-subject?id=<?= $subject["id"] ?>" class="btn btn-error btn-sm">Delete</a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -118,7 +110,7 @@ $subjects = $sc->getSubjects();
         const tabContents = document.querySelectorAll('.tabs.what');
 
         tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 const id = this.getAttribute('href');
                 tab.classList.add('tab-active');
                 tabs.forEach(tab => {
