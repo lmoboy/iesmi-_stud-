@@ -82,6 +82,39 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
+$router->addRoute('POST', '/profile', function () {
+    require_once './backend/core/userController.php';
+    $user = $_SESSION['user'];
+    if (isset($_SESSION['user'])) {
+        $userCOntroller = new userController();
+        var_dump($_POST);
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if (isset($_POST['name'])) {
+                $_SESSION['profile_error'] = "Please fill in all fields.";
+                header('Location: /profile');
+                exit();
+            }
+            if (empty(trim($_POST['name']))) {
+                $_SESSION['profile_error'] = "Please fill in all fields.";
+                header('Location: /profile');
+                exit();
+            }
+
+            if (!$userCOntroller->editUser($name,null,$user['id'])) {
+                $_SESSION['profile_error'] = "Failed to update name.";
+                header('Location: /profile');
+                exit();
+            }
+            header('Location: /profile');
+            exit();
+        }
+        View::render('user/profile');
+    } else {
+        header("Location: /");
+        exit;
+    }
+});
+
 $router->addRoute('GET', '/grade', function(){
     if (!isset($_SESSION['user'])) {
         header("Location: /");

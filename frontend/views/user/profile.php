@@ -36,7 +36,7 @@ $user = $_SESSION['user'];
         <div id="personalisation" class="tabs what flex flex-col p-4">
             <h2 class="text-xl font-bold text-center">Personalisation</h2>
             <p class="text-center">Change your name here.</p>
-            <form method="POST" class="space-y-4">
+            <form method="POST" action="/profile" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="profile-picture">
                         <span class="label-text">Profile picture</span>
@@ -58,6 +58,7 @@ $user = $_SESSION['user'];
                     <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required
                         class="input input-bordered w-full" />
                 </div>
+                <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Change name</button>
                 </div>
