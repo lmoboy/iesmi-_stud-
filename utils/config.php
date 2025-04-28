@@ -6,7 +6,7 @@ session_start();
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'schooldb');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 
 // Application Configuration
 define('BASE_URL', 'http://localhost');
