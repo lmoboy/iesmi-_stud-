@@ -193,6 +193,7 @@ if (!defined('DATABASE_INCLUDED')) {
 
         public function update($table, $data, $conditions)
         {
+            debug_log("Updating record(s) in {$table}");
             if (!$conditions) {
                 debug_log("DANGEROUS OPERATION", 'warning');
                 return false;
