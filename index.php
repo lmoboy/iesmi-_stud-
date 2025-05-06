@@ -53,6 +53,9 @@ $router->addRoute('POST', '/backend/editUserPassword', function () {
     require_once './backend/handlers/editUserPassword.php';
 });
 
+$router->addRoute('POST', '/backend/addUser', function () {
+    require_once './backend/handlers/addUser.php';
+});
 
 
 //--------------------------------FRONTEND--------------------------------
