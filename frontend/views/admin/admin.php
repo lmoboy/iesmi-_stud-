@@ -39,7 +39,7 @@ $subjects = $sc->getSubjects();
                     <?php foreach ($users as $user): ?>
                         <tr>
                             <td><?= $user['id'] ?></td>
-                            <td><?= $user['name'] ?></td>
+                            <td><?= htmlspecialchars($user['name']) ?></td>
                             <td><?= $user['role'] ?></td>
                             <td>
                                 <a href="/grades?user_id=<?= $user['id'] ?>" class="btn btn-primary btn-sm">View grades</a>
@@ -66,9 +66,9 @@ $subjects = $sc->getSubjects();
                 <tbody>
                     <?php foreach ($grades as $grade): ?>
                         <tr>
-                            <td><?= $grade["user"] ?></td>
-                            <td><?= $grade["teacher"] ?></td>
-                            <td><?= $grade["subject"] ?></td>
+                            <td><?= htmlspecialchars($grade["user"]) ?></td>
+                            <td><?= htmlspecialchars($grade["teacher"]) ?></td>
+                            <td><?= htmlspecialchars($grade["subject"])  ?></td>
                             <td><?= $grade["grade"] ?></td>
                             <td>
                                 <a href="/edit-grade?id=<?= $grade["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
@@ -93,7 +93,7 @@ $subjects = $sc->getSubjects();
                     <?php foreach ($subjects as $subject): ?>
                         <tr>
                             <td><?= $subject["id"] ?></td>
-                            <td><?= $subject["name"] ?></td>
+                            <td><?= htmlspecialchars($subject["name"]) ?></td>
                             <td>
                                 <a href="/edit-subject?id=<?= $subject["id"] ?>" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="/delete-subject?id=<?= $subject["id"] ?>" class="btn btn-error btn-sm">Delete</a>

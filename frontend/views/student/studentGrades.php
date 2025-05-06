@@ -22,7 +22,7 @@ $subjects = $subjectController->getSubjects();
         <?php foreach ($subjects as $subject): ?>
             <tr>
                 <td><a href="subject?id=<?=$subject['id'] ?><?= $user ? "&user_id=".$user : ''?>" class="btn btn-primary">Detailed</a></td>
-                <td><?= $subject['name'] ?></td>
+                <td><?= htmlspecialchars($subject['name']) ?></td>
                 <td>
                     <?php
                     $totalGrade = 0;

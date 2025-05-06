@@ -24,14 +24,8 @@ if (!$user) {
         <label class="label" for="name">
             <span class="label-text">Name</span>
         </label>
-        <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required
+        <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['name']) ?>" required
             class="input input-bordered w-full" />
-    </div>
-    <div class="form-control">
-        <label class="label" for="password">
-            <span class="label-text">Password</span>
-        </label>
-        <input type="password" id="password" name="password" required class="input input-bordered w-full" />
     </div>
     <div class="form-control">
         <label class="label" for="role">
