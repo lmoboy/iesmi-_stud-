@@ -20,7 +20,6 @@ require_once './utils/SMW.php';
 
 $router = new Router();
 
-
 //--------------------------------BACKEND--------------------------------
 
 $router->addRoute('POST', '/backend/login', function () {
