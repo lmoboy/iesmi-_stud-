@@ -1,5 +1,6 @@
 <?php
 $user = $_SESSION['user'];
+var_dump($_POST);
 ?>
 <main>
     <h1 class="text-3xl font-bold text-center">Add User</h1>
@@ -43,7 +44,7 @@ $user = $_SESSION['user'];
                     </select>
                 </div>
                 <div class="form-control mt-6">
-                <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
+                <p class="text-error"><?php echo $_SESSION['addUser_error'] ?? '' ?></p>
                     <button type="submit" class="btn btn-primary w-full">Add User</button>
                 </div>
             </form>
