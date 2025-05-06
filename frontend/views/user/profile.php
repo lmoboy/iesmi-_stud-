@@ -1,6 +1,5 @@
 <?php
 $user = $_SESSION['user'];
-
 ?>
 
 <main class="container mx-auto flex items-center justify-center p-4 space-y-4">
@@ -13,7 +12,7 @@ $user = $_SESSION['user'];
         <div id="security" class="tabs what flex flex-col hidden p-4">
             <h2 class="text-xl font-bold text-center">Security</h2>
             <p class="text-center">Change your password here.</p>
-            <form method="POST" class="space-y-4">
+            <form  method="POST" action="/backend/editUserPassword" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="old-password">
                         <span class="label-text">Old password</span>
@@ -29,6 +28,7 @@ $user = $_SESSION['user'];
                         class="input input-bordered w-full" />
                 </div>
                 <div class="form-control mt-6">
+                    <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
                     <button type="submit" class="btn btn-primary w-full">Change password</button>
                 </div>
             </form>
