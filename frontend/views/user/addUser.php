@@ -43,6 +43,7 @@ $user = $_SESSION['user'];
                     </select>
                 </div>
                 <div class="form-control mt-6">
+                <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
                     <button type="submit" class="btn btn-primary w-full">Add User</button>
                 </div>
             </form>
