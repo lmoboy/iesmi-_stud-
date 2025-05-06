@@ -25,11 +25,10 @@ class userController{
         return $this->db->create('users', ['name' => $name, 'password' => $password, 'role' => $role]);
     }
 
-    public function editUser($name, $password, $id){
-        if(SimpleMiddleWare::validRole('admin')){
-            return false;
-        }
-        return $this->db->update('users', ['name' => $name, 'password' => $password], ['id' => $id]);
+    public function editUser($name, $id){
+        debug_log('new name: '.$name );
+
+        return $this->db->update('users', ['name' => $name], ['id' => $id]);
     }
     public function deleteUser($id){
         if(SimpleMiddleWare::validRole('admin')){
