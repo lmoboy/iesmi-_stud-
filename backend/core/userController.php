@@ -30,6 +30,16 @@ class userController{
 
         return $this->db->update('users', ['name' => $name], ['id' => $id]);
     }
+    public function editUserPassword($newPassword, $id){
+        debug_log('new password for user id: '.$id.' is: '.$newPassword );
+        $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        return $this->db->update('users', ['password' => $newPassword], ['id' => $id]);
+    }
+
+    public function checkPassword($password, $id){
+        $user = $this->db->read('users', ['id' => $id]);
+        return password_verify($password, $user[0]['password']);
+    }
     public function deleteUser($id){
         if(SimpleMiddleWare::validRole('admin')){
             return false;
