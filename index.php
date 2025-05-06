@@ -34,33 +34,10 @@ $router->addRoute('GET', '/backend/logout', function () {
     exit;
 });
 
-$router->addRoute('GET', '/backend/files/get', function () {
-    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    $pictureName = $_GET['picture'];
-
-    foreach ($allowedExtensions as $extension) {
-        $filePath = __DIR__ . '/backend/files/' . $pictureName . '.' . $extension;
-        if (file_exists($filePath)) {
-
-            header('content-type: image/jpeg');
-            switch (pathinfo($filePath)['extension']) {
-                case 'png':
-                    $image = imagecreatefrompng($filePath);
-                    break;
-                case 'gif':
-                    $image = imagecreatefromgif($filePath);
-                    break;
-                default:
-                    $image = imagecreatefromjpeg($filePath);
-            }
-
-            echo imagejpeg($image);
-            imagedestroy($image);
-        }
-    }
-    http_response_code(404);
-    echo "File not found.";
+$router->addRoute('POST', '/backend/editUser', function () {
+    require_once './backend/handlers/editUser.php';
 });
+
 
 
 
@@ -82,7 +59,12 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
-$router->addRoute('GET', '/grade', function(){
+// $router->addRoute('POST', '/profile', function () {
+//     require_once './backend/core/userController.php';
+
+// });
+
+$router->addRoute('GET', '/grade', function () {
     if (!isset($_SESSION['user'])) {
         header("Location: /");
         exit;
@@ -91,7 +73,7 @@ $router->addRoute('GET', '/grade', function(){
     if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
         $userID = $_GET['user_id'];
     }
-    View::render('student/studentGrade', ['user_id'=>$userID, 'id'=>$_GET['id']]);
+    View::render('student/studentGrade', ['user_id' => $userID, 'id' => $_GET['id']]);
 });
 
 $router->addRoute("GET", "/grades", function () {
