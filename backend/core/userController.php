@@ -14,12 +14,21 @@ class userController{
         return $this->db->read('users', [], 'name, profile_picture, role, id');
     }
 
+    public function checkIfUserExisst($name){
+        $user = $this->db->read('users', ['name'=>$name], 'name, profile_picture, role, id');
+        if(empty($user)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public function getUser($id){
         return $this->db->read('users', ['id' => $id], 'name, profile_picture, role, id');
     }
 
     public function createUser($name, $password, $role){
-        if(SimpleMiddleWare::validRole('admin')){
+        if(!SimpleMiddleWare::validRole('admin')){
             return false;
         }
         return $this->db->create('users', ['name' => $name, 'password' => $password, 'role' => $role]);

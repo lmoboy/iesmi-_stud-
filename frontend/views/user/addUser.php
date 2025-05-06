@@ -1,6 +1,5 @@
 <?php
 $user = $_SESSION['user'];
-var_dump($_POST);
 ?>
 <main>
     <h1 class="text-3xl font-bold text-center">Add User</h1>

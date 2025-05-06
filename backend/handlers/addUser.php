@@ -22,7 +22,12 @@ if (isset($_SESSION['user'])) {
             header('Location: /add-user');
             exit();
         }
-        $uc->createUser($_POST['name'], password_hash($_POST['password'], PASSWORD_DEFAULT), $_POST['role']);
+        if($uc->checkIfUserExisst($_POST['name'])){
+            $_SESSION['addUser_error'] = "User already exists.";
+            header('Location: /add-user');
+            exit();
+        }
+        $resualt = $uc->createUser($_POST['name'], password_hash($_POST['password'], PASSWORD_DEFAULT), $_POST['role']);
         header('Location: /add-user');
         exit();
     }
