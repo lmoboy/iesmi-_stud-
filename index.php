@@ -12,6 +12,18 @@
 </html>
 
 <?php
+
+$lines = file('.env');
+foreach ($lines as $line) {
+    [$key, $value] = explode('=', $line, 2);
+    $key = trim($key);
+    $value = trim($value);
+
+    putenv(sprintf('%s=%s', $key, $value));
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
+}
+
 require_once './utils/config.php';
 require_once './utils/Router.php';
 require_once './utils/View.php';
@@ -19,7 +31,6 @@ require_once './utils/Database.php';
 require_once './utils/SMW.php';
 
 $router = new Router();
-
 
 //--------------------------------BACKEND--------------------------------
 
@@ -34,34 +45,17 @@ $router->addRoute('GET', '/backend/logout', function () {
     exit;
 });
 
-$router->addRoute('GET', '/backend/files/get', function () {
-    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    $pictureName = $_GET['picture'];
-
-    foreach ($allowedExtensions as $extension) {
-        $filePath = __DIR__ . '/backend/files/' . $pictureName . '.' . $extension;
-        if (file_exists($filePath)) {
-
-            header('content-type: image/jpeg');
-            switch (pathinfo($filePath)['extension']) {
-                case 'png':
-                    $image = imagecreatefrompng($filePath);
-                    break;
-                case 'gif':
-                    $image = imagecreatefromgif($filePath);
-                    break;
-                default:
-                    $image = imagecreatefromjpeg($filePath);
-            }
-
-            echo imagejpeg($image);
-            imagedestroy($image);
-        }
-    }
-    http_response_code(404);
-    echo "File not found.";
+$router->addRoute('POST', '/backend/editUser', function () {
+    require_once './backend/handlers/editUser.php';
 });
 
+$router->addRoute('POST', '/backend/editUserPassword', function () {
+    require_once './backend/handlers/editUserPassword.php';
+});
+
+$router->addRoute('POST', '/backend/addUser', function () {
+    require_once './backend/handlers/addUser.php';
+});
 
 
 //--------------------------------FRONTEND--------------------------------
@@ -88,7 +82,12 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
-$router->addRoute('GET', '/grade', function(){
+// $router->addRoute('POST', '/profile', function () {
+//     require_once './backend/core/userController.php';
+
+// });
+
+$router->addRoute('GET', '/grade', function () {
     if (!isset($_SESSION['user'])) {
         header("Location: /");
         exit;
@@ -97,7 +96,7 @@ $router->addRoute('GET', '/grade', function(){
     if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
         $userID = $_GET['user_id'];
     }
-    View::render('student/studentGrade', ['user_id'=>$userID, 'id'=>$_GET['id']]);
+    View::render('student/studentGrade', ['user_id' => $userID, 'id' => $_GET['id']]);
 });
 
 $router->addRoute("GET", "/grades", function () {

@@ -1,6 +1,5 @@
 <?php
 $user = $_SESSION['user'];
-
 ?>
 
 <main class="container mx-auto flex items-center justify-center p-4 space-y-4">
@@ -13,7 +12,7 @@ $user = $_SESSION['user'];
         <div id="security" class="tabs what flex flex-col hidden p-4">
             <h2 class="text-xl font-bold text-center">Security</h2>
             <p class="text-center">Change your password here.</p>
-            <form method="POST" class="space-y-4">
+            <form  method="POST" action="/backend/editUserPassword" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="old-password">
                         <span class="label-text">Old password</span>
@@ -29,6 +28,7 @@ $user = $_SESSION['user'];
                         class="input input-bordered w-full" />
                 </div>
                 <div class="form-control mt-6">
+                    <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
                     <button type="submit" class="btn btn-primary w-full">Change password</button>
                 </div>
             </form>
@@ -36,7 +36,7 @@ $user = $_SESSION['user'];
         <div id="personalisation" class="tabs what flex flex-col p-4">
             <h2 class="text-xl font-bold text-center">Personalisation</h2>
             <p class="text-center">Change your name here.</p>
-            <form method="POST" class="space-y-4">
+            <form method="POST" action="/backend/editUser" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="profile-picture">
                         <span class="label-text">Profile picture</span>
@@ -55,9 +55,10 @@ $user = $_SESSION['user'];
                     <label class="label" for="name">
                         <span class="label-text">Name</span>
                     </label>
-                    <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required
+                    <input type="text" id="name" name="name" value="<?= htmlspecialchars($user['name']) ?>" required
                         class="input input-bordered w-full" />
                 </div>
+                <p class="text-error"><?php echo $_SESSION['profile_error'] ?? '' ?></p>
                 <div class="form-control mt-6">
                     <button type="submit" class="btn btn-primary w-full">Change name</button>
                 </div>

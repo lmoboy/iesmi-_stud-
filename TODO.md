@@ -3,17 +3,17 @@
 ## Last to do
 - [x] Fix bugs
 - [ ] Add profile picture (pfp)
-- [ ] Export as CSV / PDF (implement export functionality for data tables)
+- [x] Export as ~~CSV~~ PDF (implement export functionality for data tables)
 - [ ] Notifications (implement notification system)
 
 ## To Do
 - [x] Add grade (UI + logic)
 - [x] Add Admin "premade"
-- [ ] Validator class (create reusable validation logic)
+- [x] Validator class (create reusable validation logic)
 - [ ] Add teacher (UI + backend logic)
 - [x] Admin page (dashboard for admin)
 - [ ] Add subject (UI + backend logic)
-- [ ] Add student (UI + backend logic)
+- [x] Add student (UI + backend logic)
 
 ## Doing
 - [ ] Working login functionality (fix issues, improve UX)
@@ -28,13 +28,13 @@
 - [x] Database (db) integration
 
 ## Info
-- [ ] [GitHub](https://github.com/)
-- [ ] [DaisyUI](https://daisyui.com/)
+- [x] [GitHub](https://github.com/)
+- [x] [DaisyUI](https://daisyui.com/)
 
 ## Additional Tasks (Controllers)
-- [ ] Create controller for exporting data (CSV/PDF)
+- [x] Create controller for exporting data (CSV/PDF)
 - [ ] Create notification controller (handle notifications logic)
-- [ ] Create authentication controller (login/logout/session)
+- [x] Create authentication controller (login/logout/session)
 - [x] Create controller for grades management
 - [x] Create controller for subjects management
 - [x] Create controller for teacher management
