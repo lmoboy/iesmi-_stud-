@@ -16,6 +16,11 @@ class subjectController{
     {
         return $this->db->read('subjects');
     }
+    
+    public function getSubjectsByName($name)
+    {
+        return $this->db->read('subjects', ['name'=>$name]);
+    }
 
     public function getSubjectById($id){
         return $this->db->read('subjects', ['id'=>$id]);
