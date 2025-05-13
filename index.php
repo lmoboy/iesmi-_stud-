@@ -44,11 +44,9 @@ $router->addRoute('POST', '/backend/addUser', function () {
     require_once './backend/handlers/addUser.php';
 });
 
-$router->addRoute('GET', '/export', function () {
-    $data['id'] = $_GET['id'] ?? $_SESSION['user']['id'];
-    require_once './backend/handlers/csvExport.php';
+$router->addRoute('POST', '/backend/editGrade', function () {
+    require_once './backend/handlers/editGrade.php';
 });
-
 
 
 //--------------------------------FRONTEND--------------------------------
@@ -75,6 +73,14 @@ $router->addRoute('GET', '/profile', function () {
     }
 });
 
+$router->addRoute('GET', '/edit-grade', function () {
+    if (isset($_SESSION['user'])) {
+        View::render('teacher/editGrade', ['id' => $_GET['id']]);
+    } else {
+        header("Location: /");
+        exit;
+    }
+});
 // $router->addRoute('POST', '/profile', function () {
 //     require_once './backend/core/userController.php';
 

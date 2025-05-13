@@ -18,22 +18,18 @@ class gradeController
     {
         return $this->db->read('grades', ['id' => $id]);
     }
-
-    public function getSubjectGrades($subjectID)
+    public function getGradesFormatted($id = null)
     {
-        return $this->db->read('grades', ['subject_id' => $subjectID]);
-    }
-    public function getUserGrades($id)
-    {
-        return $this->db->read('grades', ['user_id' => $id]);
-    }
-
-    public function getGradesFormatted()
-    {
-        $grades = $this->getGrades();
-        $users = $this->db->read('users');
-        $subjects = $this->db->read('subjects');
-
+        if($id){
+            $grades = $this->getGradeById($id);
+            $users = $this->db->read('users');
+            $subjects = $this->db->read('subjects');
+        }else{
+            $grades = $this->getGrades();
+            $users = $this->db->read('users');
+            $subjects = $this->db->read('subjects');
+        }
+        
         $formattedGrades = [];
         foreach ($grades as $grade) {
             $formattedGrades[] = [
@@ -57,12 +53,12 @@ class gradeController
         return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade]);
     }
 
-    public function updateGrade($gradeID, $grade)
+    public function updateGrade($gradeID, $grade, $subjectID)
     {
-        if (SimpleMiddleWare::validRole('teacher,admin')) {
+        if (!SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
-        return $this->db->update('grades', ['grade' => $grade], ['id' => $gradeID]);
+        return $this->db->update('grades', ['grade' => $grade,'subject_id' => $subjectID], ['id' => $gradeID]);
     }
 
     public function removeGrade($gradeID)
