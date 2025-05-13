@@ -14,22 +14,29 @@ class gradeController
     {
         return $this->db->read('grades');
     }
+
+    public function getUserGrades($id)
+    {
+        return $this->db->read('grades', ['user_id' => $id]);
+
+    }
+
     public function getGradeById($id)
     {
         return $this->db->read('grades', ['id' => $id]);
     }
     public function getGradesFormatted($id = null)
     {
-        if($id){
+        if ($id) {
             $grades = $this->getGradeById($id);
             $users = $this->db->read('users');
             $subjects = $this->db->read('subjects');
-        }else{
+        } else {
             $grades = $this->getGrades();
             $users = $this->db->read('users');
             $subjects = $this->db->read('subjects');
         }
-        
+
         $formattedGrades = [];
         foreach ($grades as $grade) {
             $formattedGrades[] = [
@@ -58,7 +65,7 @@ class gradeController
         if (!SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
-        return $this->db->update('grades', ['grade' => $grade,'subject_id' => $subjectID], ['id' => $gradeID]);
+        return $this->db->update('grades', ['grade' => $grade, 'subject_id' => $subjectID], ['id' => $gradeID]);
     }
 
     public function removeGrade($gradeID)
