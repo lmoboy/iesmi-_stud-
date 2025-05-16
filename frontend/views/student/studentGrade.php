@@ -17,7 +17,7 @@ $subject = $sc->getSubjectById($grade['subject_id'])[0];
 
 ?>
 
-<main class="p-6 bg-gray-100">
+<main class="p-6 bg-gray-100 min-h-screen">
     <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
         <h2 class="text-2xl font-bold mb-4">Grade Details</h2>
         <p><strong>Teacher:</strong> <?= htmlspecialchars($teacher['name']) ?></p>
