@@ -161,7 +161,7 @@ $router->addRoute("GET", "/add-subject", function () {
     debug_log("Final user ID:" . $userID);
 
 
-    View::render('teacher/addSubject', ['id' => $_GET['id'], 'user_id' => $userID]);
+    View::render('teacher/addSubject');
 });
 
 $router->addRoute("GET", "/teacher", function () {

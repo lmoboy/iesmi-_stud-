@@ -28,7 +28,7 @@ class subjectController{
 
     public function createSubject($name)
     {
-        if (SimpleMiddleWare::validRole('teacher,admin')) {
+        if (!SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
         return $this->db->create('subjects', ['name' => $name]);
