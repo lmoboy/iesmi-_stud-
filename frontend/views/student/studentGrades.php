@@ -12,7 +12,7 @@ $subjects = $subjectController->getSubjects();
 ?>
 <table class="table w-full">
     <div class="mt-6">
-        <a href="/export?id=<?= $user ?>" class="btn btn-secondary">Export Data</a>
+        <a href="/backend/export?id=<?= $user ?>" class="btn btn-secondary">Export Data</a>
     </div>
     <thead>
         <tr>

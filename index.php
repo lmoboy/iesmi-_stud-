@@ -49,6 +49,10 @@ $router->addRoute('POST', '/backend/editGrade', function () {
 });
 
 
+$router->addRoute('GET', '/backend/export', function () {
+    require_once './backend/handlers/csvExport.php';
+});
+
 //--------------------------------FRONTEND--------------------------------
 $router->addRoute('GET', '/', function () {
     if (isset($_SESSION['user'])) {
@@ -58,9 +62,6 @@ $router->addRoute('GET', '/', function () {
     }
 });
 
-$router->addRoute('GET', '/csvt', function () {
-    require_once './backend/handlers/csvExport.php';
-});
 
 
 
