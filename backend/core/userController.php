@@ -45,6 +45,7 @@ class userController{
         return $this->db->update('users', ['password' => $newPassword], ['id' => $id]);
     }
 
+
     public function checkPassword($password, $id){
         $user = $this->db->read('users', ['id' => $id]);
         return password_verify($password, $user[0]['password']);
