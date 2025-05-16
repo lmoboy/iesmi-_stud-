@@ -53,6 +53,15 @@ $router->addRoute('GET', '/backend/export', function () {
     require_once './backend/handlers/csvExport.php';
 });
 
+
+$router->addRoute('POST', '/backend/addGrade', function () {
+    require_once './backend/handlers/addGrade.php';
+});
+
+$router->addRoute('POST', '/backend/addSubject', function () {
+    require_once './backend/handlers/addSubject.php';
+});
+
 //--------------------------------FRONTEND--------------------------------
 $router->addRoute('GET', '/', function () {
     if (isset($_SESSION['user'])) {
@@ -125,6 +134,34 @@ $router->addRoute("GET", "/subject", function () {
 
 
     View::render('student/subjectGrades', ['id' => $_GET['id'], 'user_id' => $userID]);
+});
+
+$router->addRoute("GET", "/add-grade", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+    }
+    View::render('teacher/addGrade', ['user_id' => $userID]);
+});
+
+$router->addRoute("GET", "/add-subject", function () {
+    if (!isset($_SESSION['user'])) {
+        header("Location: /");
+        exit;
+    }
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+        debug_log("ID changed to:" . $userID);
+    }
+    debug_log("Final user ID:" . $userID);
+
+
+    View::render('teacher/addSubject', ['id' => $_GET['id'], 'user_id' => $userID]);
 });
 
 $router->addRoute("GET", "/teacher", function () {
