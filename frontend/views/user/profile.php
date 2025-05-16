@@ -12,7 +12,7 @@ $user = $_SESSION['user'];
         <div id="security" class="tabs what flex flex-col hidden p-4">
             <h2 class="text-xl font-bold text-center">Security</h2>
             <p class="text-center">Change your password here.</p>
-            <form  method="POST" action="/backend/editUserPassword" class="space-y-4">
+            <form method="POST" action="/backend/editUserPassword" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="old-password">
                         <span class="label-text">Old password</span>
@@ -44,7 +44,8 @@ $user = $_SESSION['user'];
                     <div class="avatar">
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
 
-                            <img id="profile-picture-preview" src="/backend/files/<?=$_SESSION['user']['profile_picture']?>.jpg"
+                            <img id="profile-picture-preview"
+                                src="/backend/files/<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>"
                                 class="w-full rounded-full" />
                         </div>
                         <input type="file" id="profile-picture" name="profile-picture" class="hidden"
@@ -69,7 +70,7 @@ $user = $_SESSION['user'];
 
 <script>
 
-    
+
 
 
 
