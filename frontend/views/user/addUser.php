@@ -1,7 +1,7 @@
 <?php
 $user = $_SESSION['user'];
 ?>
-<main>
+<main class="min-h-screen">
     <h1 class="text-3xl font-bold text-center">Add User</h1>
     <div class="flex items-center justify-center min-h-screen bg-base">
         <div class="w-full max-w-sm p-6 space-y-6 bg-base-100 rounded-lg shadow-lg">
