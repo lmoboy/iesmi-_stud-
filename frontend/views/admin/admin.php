@@ -17,7 +17,7 @@ $subjects = $sc->getSubjects();
 
 
 
-<body>
+<body class="min-h-screen ">
     <div class="p-4 space-y-4">
         <h1 class="text-3xl font-bold text-center text-primary">Admin Panel</h1>
         <div class="tabs">

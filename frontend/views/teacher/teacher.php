@@ -15,7 +15,7 @@ $users = $uc->getUsers();
 
 
 
-<main class="p-4">
+<main class="p-4 min-h-screen">
     <div class="overflow-x-auto">
         <table class="table w-full">
             <thead>

@@ -2,7 +2,7 @@
 $user = $_SESSION['user'];
 ?>
 
-<main class="container mx-auto flex items-center justify-center p-4 space-y-4">
+<main class="container mx-auto flex items-center justify-center p-4 space-y-4 min-h-screen">
     <div class="w-2/3 max-w-4xl p-4 space-y-4 bg-base-100 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center text-primary">Profile</h1>
         <div class="tabs">
