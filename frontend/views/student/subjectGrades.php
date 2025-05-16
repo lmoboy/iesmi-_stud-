@@ -27,7 +27,7 @@ usort($dates, function ($a, $b) {
 });
 
 ?>
-<main>
+<main class="min-h-screen">
     <div>
         <h1 style="text-align: center; font-size: 2em; font-weight: bold;">Subject Grades</h1>
         <h2 style="text-align: center; font-size: 1.5em;"><?= htmlspecialchars(ucfirst($subject['name'])) ?></h2>
