@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IESMINS_STUDE</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-
-</html>
-
 <?php
 
 $lines = file('.env');
@@ -70,6 +57,12 @@ $router->addRoute('GET', '/', function () {
         View::render('generic/login');
     }
 });
+
+$router->addRoute('GET', '/csvt', function () {
+    require_once './backend/handlers/csvExport.php';
+});
+
+
 
 $router->addRoute('GET', '/profile', function () {
     if (isset($_SESSION['user'])) {
@@ -182,7 +175,7 @@ $router->addRoute('GET', '/edit-user', function () {
         exit;
     }
     $userID = $_GET['id'];
-    View::render('user/editUser', ['id' => $userID]);
+    View::render('admin/editUser', ['id' => $userID]);
 });
 
 $router->handleRequest();

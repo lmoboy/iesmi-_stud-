@@ -11,6 +11,9 @@ $subjects = $subjectController->getSubjects();
 
 ?>
 <table class="table w-full">
+    <div class="mt-6">
+        <a href="/export?id=<?= $user ?>" class="btn btn-secondary">Export Data</a>
+    </div>
     <thead>
         <tr>
             <th>Details</th>
@@ -21,7 +24,8 @@ $subjects = $subjectController->getSubjects();
     <tbody>
         <?php foreach ($subjects as $subject): ?>
             <tr>
-                <td><a href="subject?id=<?=$subject['id'] ?><?= $user ? "&user_id=".$user : ''?>" class="btn btn-primary">Detailed</a></td>
+                <td><a href="subject?id=<?= $subject['id'] ?><?= $user ? "&user_id=" . $user : '' ?>"
+                        class="btn btn-primary">Detailed</a></td>
                 <td><?= htmlspecialchars($subject['name']) ?></td>
                 <td>
                     <?php

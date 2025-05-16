@@ -32,5 +32,7 @@ $subject = $sc->getSubjectById($grade['subject_id'])[0];
                 <a href="delete-grade?id=<?= urlencode($grade['id']) ?>" class="btn btn-error">Remove Grade</a>
             </div>
         <?php endif; ?>
+
+
     </div>
 </main>
