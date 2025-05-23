@@ -4,19 +4,6 @@
 /.env
 
 /backend/files
-/backend/files/
-/backend/files/*
-/backend/files/.gitkeep
-
-./backend/files
-./backend/files/*
-./backend/files/
-./backend/files/.gitkeep
-
-
-
-
-/backend/files
 /backend/files/*
 /backend/files/.gitkeep
 
