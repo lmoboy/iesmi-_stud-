@@ -1,16 +1,19 @@
 <?php
 require_once './backend/core/gradeController.php';
 
+if (isset($_SESSION['user'])) {
+    $gc = new gradeController();
+    $grades = $gc->getUserGrades($_SESSION['user']['id']);
+    // var_dump($grades);
+    $notifications = NULL;
 
-$gc = new gradeController();
-$grades = $gc->getUserGrades($_SESSION['user']['id']);
-// var_dump($grades);
-$notifications = NULL;
+    foreach ($grades as $grade) {
+        if ($grade['notified'] == 1) {
 
-foreach ($grades as $grade) {
-    if ($grade['notified'] == 1) {
-        $notifications += 1;
+            $notifications += 1;
+        }
     }
+
 }
 ?>
 
@@ -49,6 +52,3 @@ foreach ($grades as $grade) {
         <?php endif; ?>
     </div>
 </div>
-
-
-<!-- /backend/files/get?picture=<?= $_SESSION['user']['profile_picture'] ?> -->
