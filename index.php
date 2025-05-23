@@ -73,6 +73,10 @@ $router->addRoute('GET', '/', function () {
 
 
 
+$router->addRoute('GET', '/notifications', function () {
+    View::render("user/notifications");
+});
+
 
 $router->addRoute('GET', '/profile', function () {
     if (isset($_SESSION['user'])) {
