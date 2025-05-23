@@ -21,6 +21,12 @@ class gradeController
 
     }
 
+
+    public function setGradeRead($gradeId)
+    {
+        return $this->db->update("grades", ['notified' => 0], ["id" => $gradeId]);
+    }
+
     public function getGradeById($id)
     {
         return $this->db->read('grades', ['id' => $id]);
@@ -57,7 +63,7 @@ class gradeController
         if (!SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
-        return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade,'teacher_id' => $_SESSION['user']['id']]);
+        return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade, 'teacher_id' => $_SESSION['user']['id']]);
     }
 
     public function updateGrade($gradeID, $grade, $subjectID)
