@@ -49,7 +49,7 @@ $router->addRoute('POST', '/backend/editGrade', function () {
 });
 
 
-$router->addRoute('GET', '/backend/export', function () {
+$router->addRoute('GET', '/export', function () {
     require_once './backend/handlers/csvExport.php';
 });
 
