@@ -3,6 +3,18 @@
 .env
 /.env
 
+/backend/files
+/backend/files/
+/backend/files/*
+/backend/files/.gitkeep
+
+./backend/files
+./backend/files/*
+./backend/files/
+./backend/files/.gitkeep
+
+
+
 
 /utils/config.php
 ./utils/config.php
