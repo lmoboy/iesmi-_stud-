@@ -28,49 +28,8 @@ class userController
 
     public function updateUserImage($id, $image)
     {
-        if (!isset($image['tmp_name']) || !is_uploaded_file($image['tmp_name'])) {
-            debug_log('No image uploaded or invalid file.');
-            return false;
-        }
 
-        // Validate file type (allow only images)
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if (!in_array($image['type'], $allowedTypes)) {
-            debug_log('Type wrong fuck off.');
-            return false;
-        }
-
-        // Validate file size (max 5MB)
-        if ($image['size'] > 5 * 1024 * 1024) {
-            debug_log('File too fat like your mum, fuck you.');
-
-            return false;
-        }
-
-        // Generate a unique filename
-        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-        $newFileName = uniqid('userimg_', true) . '.' . $ext;
-
-        // Set destination directory
-        $destinationDir = __DIR__ . '/../files/';
-        if (!is_dir($destinationDir)) {
-            debug_log('You lost???? itty bitty baby blyat.');
-
-
-            mkdir($destinationDir, 0755, true);
-        }
-        $destination = $destinationDir . $newFileName;
-
-        // Move the uploaded file
-        if (!move_uploaded_file($image['tmp_name'], $destination)) {
-            debug_log('Fuck you.');
-
-            return false;
-        }
-
-        // Save only the relative path in the database
-        $imagePath = $newFileName;
-        return $this->db->update('users', ['profile_picture' => $imagePath], ['id' => $id]);
+        return $this->db->update('users', ['profile_picture' => $image], ['id' => $id]);
     }
 
     public function getUser($id)

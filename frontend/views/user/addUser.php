@@ -5,7 +5,7 @@ $user = $_SESSION['user'];
     <h1 class="text-3xl font-bold text-center">Add User</h1>
     <div class="flex items-center justify-center min-h-screen bg-base">
         <div class="w-full max-w-sm p-6 space-y-6 bg-base-100 rounded-lg shadow-lg">
-            <form action="/backend/addUser" method="POST" class="space-y-4">
+            <form action="/backend/addUser" method="POST" enctype="multipart/form-data" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="name">
                         <span class="label-text">Name</span>
@@ -25,7 +25,8 @@ $user = $_SESSION['user'];
                     <div class="avatar">
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
 
-                            <img id="profile-picture-preview" src="/backend/files/<?=$_SESSION['user']['profile_picture']?>.jpg"
+                            <img id="profile-picture-preview"
+                                src="/backend/files/<?= $_SESSION['user']['profile_picture'] ?>"
                                 class="w-full rounded-full" />
                         </div>
                         <input type="file" id="profile-picture" name="profile-picture" class="hidden"
@@ -43,7 +44,7 @@ $user = $_SESSION['user'];
                     </select>
                 </div>
                 <div class="form-control mt-6">
-                <p class="text-error"><?php echo $_SESSION['addUser_error'] ?? '' ?></p>
+                    <p class="text-error"><?php echo $_SESSION['addUser_error'] ?? '' ?></p>
                     <button type="submit" class="btn btn-primary w-full">Add User</button>
                 </div>
             </form>
