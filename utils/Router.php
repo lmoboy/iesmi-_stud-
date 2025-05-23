@@ -20,7 +20,9 @@ class Router
         $url = isset($_GET['url']) ? '/' . trim($_GET['url'], '/') : '/';
 
         debug_log("Handling request: {$method} {$url}");
-
+        if (!isset($_SESSION["user"])) {
+            View::render('generic/login');
+        }
         foreach ($this->routes as $route) {
             if ($route['method'] === $method) {
                 $params = $this->matchPath($route['path'], $url);
