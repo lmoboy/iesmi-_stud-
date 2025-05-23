@@ -12,7 +12,7 @@ $user = $_SESSION['user'];
         <div id="security" class="tabs what flex flex-col hidden p-4">
             <h2 class="text-xl font-bold text-center">Security</h2>
             <p class="text-center">Change your password here.</p>
-            <form  method="POST" action="/backend/editUserPassword" class="space-y-4">
+            <form method="POST" action="/backend/editUserPassword" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="old-password">
                         <span class="label-text">Old password</span>
@@ -36,7 +36,7 @@ $user = $_SESSION['user'];
         <div id="personalisation" class="tabs what flex flex-col p-4">
             <h2 class="text-xl font-bold text-center">Personalisation</h2>
             <p class="text-center">Change your name here.</p>
-            <form method="POST" action="/backend/editUser" class="space-y-4">
+            <form method="POST" action="/backend/editUser" enctype="multipart/form-data" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="profile-picture">
                         <span class="label-text">Profile picture</span>
@@ -44,7 +44,8 @@ $user = $_SESSION['user'];
                     <div class="avatar">
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
 
-                            <img id="profile-picture-preview" src="/backend/files/<?=$_SESSION['user']['profile_picture']?>.jpg"
+                            <img id="profile-picture-preview"
+                                src="/backend/files/<?= htmlspecialchars($_SESSION['user']['profile_picture'] ?? 'student.png') ?>"
                                 class="w-full rounded-full" />
                         </div>
                         <input type="file" id="profile-picture" name="profile-picture" class="hidden"
@@ -69,7 +70,7 @@ $user = $_SESSION['user'];
 
 <script>
 
-    
+
 
 
 
@@ -84,6 +85,31 @@ $user = $_SESSION['user'];
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tabs.what');
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const hash = window.location.hash;
+        if (hash) {
+            tabs.forEach(tab => {
+                if (tab.getAttribute('href') === hash) {
+                    tab.classList.add('tab-active');
+                } else {
+                    tab.classList.remove('tab-active');
+                }
+            });
+            tabContents.forEach(tabContent => {
+                if (tabContent.id === hash.substring(1)) {
+                    tabContent.classList.remove('hidden');
+                    tabContent.style.display = 'block';
+
+                } else {
+                    tabContent.classList.add('hidden');
+                    tabContent.style.display = 'none';
+
+                }
+            });
+        }
+    });
+
+
     tabs.forEach(tab => {
         tab.addEventListener('click', function () {
             const id = this.getAttribute('href');
@@ -96,8 +122,10 @@ $user = $_SESSION['user'];
             tabContents.forEach(tabContent => {
                 if (tabContent.id === id.substring(1)) {
                     tabContent.classList.remove('hidden');
+                    tabContent.style.display = 'block';
                 } else {
                     tabContent.classList.add('hidden');
+                    tabContent.style.display = 'none';
                 }
             });
         });
