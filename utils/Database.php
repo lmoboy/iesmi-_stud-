@@ -83,13 +83,13 @@ if (!defined('DATABASE_INCLUDED')) {
         )";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin', 'admin')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('admin@admin.admin', '" . password_hash('admin@admin.admin', PASSWORD_DEFAULT) . "', 'admin', 'admin.jpg')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher', 'teacher')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('teacher@teacher.teacher', '" . password_hash('teacher@teacher.teacher', PASSWORD_DEFAULT) . "', 'teacher', 'teacher.png')";
             $this->query($sql);
 
-            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'student')";
+            $sql = "INSERT INTO users (name, password, role, profile_picture) VALUES ('student@student.student', '" . password_hash('student@student.student', PASSWORD_DEFAULT) . "', 'student', 'student.jpg')";
             $this->query($sql);
 
 

@@ -27,7 +27,7 @@ $subjects = ((new subjectController)->getSubjects());
 <main class="p-4 min-h-screen">
     <div class="space-y-4">
         <h2 class="text-xl font-bold text-center">Edit Grades</h2>
-        <form method="POST" action="/backend/addGrade" class="space-y-4">
+        <form method="POST" action="/backend/addSubject" class="space-y-4">
             <div class="form-control">
                 <label class="label" for="subject">
                     <span class="label-text">Subject name</span>
