@@ -18,11 +18,8 @@ if(!isset($_SESSION["user"])){
 }
 $gc = new gradeController;
 $subjects = ((new subjectController)->getSubjects());
-// var_dump($grade);
-// echo "<br/>";
-// var_dump($subjects);
-// echo "<br/>";
-// var_dump((new SubjectController)->getSubjectsByName('history'));
+$uc = new userController();
+$users = $uc->getUsers();
 ?>
 
 <main class="p-4 min-h-screen">
@@ -30,16 +27,22 @@ $subjects = ((new subjectController)->getSubjects());
         <h2 class="text-xl font-bold text-center">Edit Grades</h2>
         <form method="POST" action="/backend/addGrade" class="space-y-4">
                         <div class="form-control">
-                <label class="label" for="grade">
+                <label class="label" for="student">
                     <span class="label-text">Student</span>
                 </label>
-                <input type="text" id="student" name="student" required class="input input-bordered w-full" />
+                <select id="student" name="student" required class="select select-bordered w-full">
+                    <?php foreach ($users as $user): ?>
+                        <option value="<?= htmlspecialchars($user['id']) ?>">
+                            <?= htmlspecialchars($user['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-control">
                 <label class="label" for="grade">
                     <span class="label-text">Grade</span>
                 </label>
-                <input type="number" id="grade" name="grade" required class="input input-bordered w-full" min="0" max="100" />
+                <input type="number" id="grade" name="grade" required class="input input-bordered w-full" min="1" max="10" />
             </div>
             <div class="form-control">
                 <label class="label" for="subject">
@@ -65,5 +68,6 @@ $subjects = ((new subjectController)->getSubjects());
 </main>
 
 <script>
+
 
 </script>

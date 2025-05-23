@@ -1,6 +1,7 @@
 <?php
 include_once './backend/core/gradeController.php';
 include_once './backend/core/userController.php';
+include_once './backend/core/subjectController.php';
 
 
 if (isset($_SESSION['user'])) {
