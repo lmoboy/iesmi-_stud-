@@ -84,29 +84,30 @@ $user = $_SESSION['user'];
 
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tabs.what');
-
     document.addEventListener('DOMContentLoaded', function () {
-        const hash = window.location.hash;
-        if (hash) {
-            tabs.forEach(tab => {
-                if (tab.getAttribute('href') === hash) {
-                    tab.classList.add('tab-active');
-                } else {
-                    tab.classList.remove('tab-active');
-                }
-            });
-            tabContents.forEach(tabContent => {
-                if (tabContent.id === hash.substring(1)) {
-                    tabContent.classList.remove('hidden');
-                    tabContent.style.display = 'block';
-
-                } else {
-                    tabContent.classList.add('hidden');
-                    tabContent.style.display = 'none';
-
-                }
-            });
+        let hash = window.location.hash;
+        // Default to #personalisation if no hash or invalid hash
+        const validHashes = Array.from(tabs).map(tab => tab.getAttribute('href'));
+        if (!hash || !validHashes.includes(hash)) {
+            hash = '#personalisation';
+            window.location.hash = hash;
         }
+        tabs.forEach(tab => {
+            if (tab.getAttribute('href') === hash) {
+                tab.classList.add('tab-active');
+            } else {
+                tab.classList.remove('tab-active');
+            }
+        });
+        tabContents.forEach(tabContent => {
+            if (tabContent.id === hash.substring(1)) {
+                tabContent.classList.remove('hidden');
+                tabContent.style.display = 'block';
+            } else {
+                tabContent.classList.add('hidden');
+                tabContent.style.display = 'none';
+            }
+        });
     });
 
 
