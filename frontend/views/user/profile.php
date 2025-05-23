@@ -36,7 +36,7 @@ $user = $_SESSION['user'];
         <div id="personalisation" class="tabs what flex flex-col p-4">
             <h2 class="text-xl font-bold text-center">Personalisation</h2>
             <p class="text-center">Change your name here.</p>
-            <form method="POST" action="/backend/editUser" class="space-y-4">
+            <form method="POST" action="/backend/editUser" enctype="multipart/form-data" class="space-y-4">
                 <div class="form-control">
                     <label class="label" for="profile-picture">
                         <span class="label-text">Profile picture</span>
@@ -45,7 +45,7 @@ $user = $_SESSION['user'];
                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
 
                             <img id="profile-picture-preview"
-                                src="/backend/files/<?= htmlspecialchars($_SESSION['user']['profile_picture']) ?>"
+                                src="/backend/files/<?= htmlspecialchars($_SESSION['user']['profile_picture'] ?? 'student.png') ?>"
                                 class="w-full rounded-full" />
                         </div>
                         <input type="file" id="profile-picture" name="profile-picture" class="hidden"
