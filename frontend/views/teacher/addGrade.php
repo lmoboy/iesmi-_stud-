@@ -24,13 +24,13 @@ $users = $uc->getUsers();
 
 <main class="p-4 min-h-screen">
     <div class="space-y-4">
-        <h2 class="text-xl font-bold text-center">Edit Grades</h2>
+        <h2 class="text-xl font-bold text-center">Add Grades</h2>
         <form method="POST" action="/backend/addGrade" class="space-y-4">
                         <div class="form-control">
-                <label class="label" for="student">
+                <label class="label" for="student_id">
                     <span class="label-text">Student</span>
                 </label>
-                <select id="student" name="student" required class="select select-bordered w-full">
+                <select id="student_id" name="student_id" required class="select select-bordered w-full">
                     <?php foreach ($users as $user): ?>
                         <option value="<?= htmlspecialchars($user['id']) ?>">
                             <?= htmlspecialchars($user['name']) ?>
@@ -45,10 +45,10 @@ $users = $uc->getUsers();
                 <input type="number" id="grade" name="grade" required class="input input-bordered w-full" min="1" max="10" />
             </div>
             <div class="form-control">
-                <label class="label" for="subject">
+                <label class="label" for="subject_id">
                     <span class="label-text">Subject</span>
                 </label>
-                <select id="subject" name="subject" required class="select select-bordered w-full">
+                <select id="subject_id" name="subject_id" required class="select select-bordered w-full">
                     <?php foreach ($subjects as $subject): ?>
                         <option value="<?= $subject['id'] ?>">
                             <?= htmlspecialchars($subject['name']) ?>
