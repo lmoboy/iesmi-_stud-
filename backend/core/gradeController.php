@@ -54,10 +54,10 @@ class gradeController
 
     public function addGrades($userID, $subjectID, $grade)
     {
-        if (SimpleMiddleWare::validRole('teacher,admin')) {
+        if (!SimpleMiddleWare::validRole('teacher,admin')) {
             return false;
         }
-        return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade]);
+        return $this->db->create('grades', ['user_id' => $userID, 'subject_id' => $subjectID, 'grade' => $grade,'teacher_id' => $_SESSION['user']['id']]);
     }
 
     public function updateGrade($gradeID, $grade, $subjectID)
