@@ -12,14 +12,26 @@ if (isset($_SESSION['user'])) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // if (empty(trim($_POST['subject']))) {
-        //     $_SESSION['addGrade_error'] = "Please fill in all fields.";
-        //     header('Location: /add-subject');
-        //     exit();
-        // }
+        if (empty(trim($_POST['student_id']))) {
+            $_SESSION['addGrade_error'] = "Please fill in all fields.";
+            header('Location: /add-grade');
+            exit();
+        }
 
-        $sc->createSubject(trim($_POST['subject']));
-        header('Location: /add-grade');
+        if (empty(trim($_POST['subject_id']))) {
+            $_SESSION['addGrade_error'] = "Please fill in all fields.";
+            header('Location: /add-grade');
+            exit();
+        }
+
+        if (empty(trim($_POST['grade']))) {
+            $_SESSION['addGrade_error'] = "Please fill in all fields.";
+            header('Location: /add-grade');
+            exit();
+        }
+
+        $gc->addGrades(trim($_POST['student_id']), trim($_POST['subject_id']), trim($_POST['grade']));
+        header('Location: /admin#grades');
         exit();
     }
     header('Location: /add-grade');
