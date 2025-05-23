@@ -106,26 +106,53 @@ $subjects = $sc->getSubjects();
         </div>
     </div>
     <script>
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tabs.what');
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tabs.what');
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function () {
-                const id = this.getAttribute('href');
-                tab.classList.add('tab-active');
-                tabs.forEach(tab => {
-                    if (tab.getAttribute('href') !== id) {
-                        tab.classList.remove('tab-active');
-                    }
-                });
-                tabContents.forEach(tabContent => {
-                    if (tabContent.id === id.substring(1)) {
-                        tabContent.classList.remove('hidden');
-                    } else {
-                        tabContent.classList.add('hidden');
-                    }
-                });
+    document.addEventListener('DOMContentLoaded', function () {
+        const hash = window.location.hash;
+        if (hash) {
+            tabs.forEach(tab => {
+                if (tab.getAttribute('href') === hash) {
+                    tab.classList.add('tab-active');
+                } else {
+                    tab.classList.remove('tab-active');
+                }
+            });
+            tabContents.forEach(tabContent => {
+                if (tabContent.id === hash.substring(1)) {
+                    tabContent.classList.remove('hidden');
+                    tabContent.style.display = 'block';
+
+                } else {
+                    tabContent.classList.add('hidden');
+                    tabContent.style.display = 'none';
+
+                }
+            });
+        }
+    });
+
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            const id = this.getAttribute('href');
+            tab.classList.add('tab-active');
+            tabs.forEach(tab => {
+                if (tab.getAttribute('href') !== id) {
+                    tab.classList.remove('tab-active');
+                }
+            });
+            tabContents.forEach(tabContent => {
+                if (tabContent.id === id.substring(1)) {
+                    tabContent.classList.remove('hidden');
+                    tabContent.style.display = 'block';
+                } else {
+                    tabContent.classList.add('hidden');
+                    tabContent.style.display = 'none';
+                }
             });
         });
+    });
     </script>
 </body>
