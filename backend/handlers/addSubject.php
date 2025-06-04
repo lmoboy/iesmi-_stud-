@@ -17,6 +17,12 @@ if (isset($_SESSION['user'])) {
             exit();
         }
 
+        if ($sc->checkIfSubjectExists(trim($_POST['subject']))) {
+            $_SESSION['addSubject_error'] = "Duplicate subject.";
+            header('Location: /add-subject');
+            exit();
+        }
+
         $sc->createSubject(trim($_POST['subject']));
         header('Location: /add-subject');
         exit();
