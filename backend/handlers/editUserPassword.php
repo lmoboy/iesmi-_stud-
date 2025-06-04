@@ -17,6 +17,11 @@ if (isset($_SESSION['user'])) {
             header('Location: /profile#security');
             exit();
         }
+        if (strlen(string: trim($_POST['new-password'])) < 8) {
+            $_SESSION['addUser_error'] = "Make sure the password is atleast 8 characters long.";
+            header('Location: /profile#security');
+            exit();
+        }
         if($uc->checkPassword($_POST['old-password'], $user['id'])){
             $_SESSION['profile_error'] = "Wrong password.";
             header('Location: /profile#security');
