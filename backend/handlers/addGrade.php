@@ -30,6 +30,12 @@ if (isset($_SESSION['user'])) {
             exit();
         }
 
+        if (trim($_POST['grade']) < 0 || trim($_POST['grade']) > 10) {
+            $_SESSION['addGrade_error'] = "Make sure the grade is between 0 and 10.";
+            header('Location: /add-grade');
+            exit();
+        }
+
         $gc->addGrades(trim($_POST['student_id']), trim($_POST['subject_id']), trim($_POST['grade']));
         header('Location: /admin#grades');
         exit();

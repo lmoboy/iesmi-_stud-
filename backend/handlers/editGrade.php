@@ -19,6 +19,12 @@ if (isset($_SESSION['user'])) {
             exit();
         }
 
+        if (!isset($_POST['grade_id'])) {
+            $_SESSION['editGrade_error'] = "Please fill in all fields.";
+            header('Location: /edit-grade?id=' . $_POST['grade_id']);
+            exit();
+        }
+
         if ($_POST['grade'] < 0 || $_POST['grade'] > 100) {
             $_SESSION['editGrade_error'] = "Grade must be between 0 and 100.";
             header('Location: /edit-grade?id=' . $_POST['grade_id']);
