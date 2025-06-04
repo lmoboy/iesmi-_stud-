@@ -17,6 +17,8 @@ $users = $uc->getUsers();
 
 <main class="p-4 min-h-screen">
     <div class="overflow-x-auto">
+        <div class="flex justify-end"><a href="/add-subject" class="btn btn-primary">Add Subject</a></div>
+        <div class="flex justify-end"><a href="/add-grade" class="btn btn-primary">Add Grade</a></div>
         <table class="table w-full">
             <thead>
                 <tr>
