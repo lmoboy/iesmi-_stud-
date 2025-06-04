@@ -51,7 +51,23 @@ $router->addRoute('POST', '/backend/editGrade', function () {
 
 $router->addRoute('GET', '/export', function () {
     require_once './backend/handlers/csvExport.php';
+    $userID = $_GET['user_id'] ?? $_SESSION['user']['id'];
+    $export = new CSVExport();
+    $export->exportUser($userID);
+
 });
+
+
+$router->addRoute('GET', '/export-grade', function () {
+    if (!isset($_GET['id'])) {
+        header("Location: /");
+        exit;
+    }
+    require_once './backend/handlers/csvExport.php';
+    $export = new CSVExport();
+    $export->exportLesson($_GET['id']);
+});
+
 
 
 $router->addRoute('POST', '/backend/addGrade', function () {
@@ -181,10 +197,12 @@ $router->addRoute("GET", "/student", function () {
         header("Location: /");
         exit;
     }
-    View::render('student');
+    $userID = $_SESSION['user']['id'];
+    if (isset($_GET['user_id']) && SimpleMiddleWare::validRole('teacher, admin')) {
+        $userID = $_GET['user_id'];
+    }
+    View::render('student/studentGrades', ['user_id' => $userID]);
 });
-
-
 
 
 
