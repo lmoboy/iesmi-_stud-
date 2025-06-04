@@ -36,15 +36,6 @@ $users = $uc->getUsers();
             </tbody>
         </table>
     </div>
-    <div class="flex justify-center mt-4">
-        <div class="btn-group" id="pagination">
-            <button class="btn">Previous</button>
-            <button class="btn">1</button>
-            <button class="btn">2</button>
-            <button class="btn">3</button>
-            <button class="btn">Next</button>
-        </div>
-    </div>
 </main>
 
 <script>
