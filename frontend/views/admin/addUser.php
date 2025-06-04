@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="label" for="name">
                     <span class="label-text">Name</span>
                 </label>
-                <input type="text" id="name" name="name" required class="input input-bordered w-full" />
+                <input type="text" id="name" name="name" pattern="(\w)" required class="input input-bordered w-full" />
             </div>
             <div class="form-control">
                 <label class="label" for="password">
