@@ -22,6 +22,11 @@ if (isset($_SESSION['user'])) {
             header('Location: /add-user');
             exit();
         }
+        if (strlen(string: trim($_POST['password'])) < 8) {
+            $_SESSION['addUser_error'] = "Make sure the password is atleast 8 characters long.";
+            header('Location: /add-user');
+            exit();
+        }
         if($uc->checkIfUserExisst($_POST['name'])){
             $_SESSION['addUser_error'] = "User already exists.";
             header('Location: /add-user');
